@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{CAROUSEL_TITLE}}</title>
+
+  <!-- FONTS — Bebas Neue (display) + Space Grotesk (body) + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary:     '#8566AF',
+            secondary:   '#BA943B',
+            accent:      '#EA3F2C',
+            'accent-alt':'#FF552E',
+            brand:       '#09090B',
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'Impact', 'sans-serif'],
+            body:    ['"Space Grotesk"', '"Helvetica Neue"', 'sans-serif'],
+            mono:    ['"JetBrains Mono"', '"SF Mono"', 'monospace'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    /* ── Canvas — never override ──────────────────────── */
+    .slide {
+      width: 1080px; height: 1350px;
+      position: relative; overflow: hidden;
+      background: #ffffff;
+      border-left: 12px solid #09090b;
+      border-right: 12px solid #09090b;
+      border-top: 14px solid #09090b;
+      border-bottom: 14px solid #09090b;
+    }
+    /* Grid overlay */
+    .slide::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(to right, rgba(9,9,11,.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(9,9,11,.07) 1px, transparent 1px);
+      background-size: 54px 54px;
+    }
+    /* Subtle grain texture overlay */
+    .slide::after {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+    .chrome { position: relative; z-index: 1; height: 100%; padding: 78px 76px; display: flex; flex-direction: column; }
+    body { background: #e8e7ec; margin: 0; font-family: 'Space Grotesk', sans-serif; }
+    .deck { width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px; padding: 48px 0 80px; }
+
+    /* Slide counter always bottom-right */
+    .slide-counter {
+      position: absolute; bottom: 28px; right: 32px; z-index: 2;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700; font-size: 18px;
+      color: rgba(9,9,11,0.25);
+      letter-spacing: 0.15em;
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+
+    <!-- ══ SLIDE 1 — COVER ════════════════════════════════════ -->
+    <!-- THE UNFORGETTABLE RULE: one element must work as a standalone viral image -->
+    <!-- Pattern: kicker → bleed-headline OR hero-headline → subtitle → badge-row -->
+    <section class="slide" id="slide-01">
+      <div class="chrome">
+        <!-- KICKER -->
+        <!-- HEADLINE (bleed or hero) -->
+        <!-- SUBTITLE -->
+        <!-- BADGE ROW (mt-auto to push to bottom) -->
+      </div>
+      <span class="slide-counter">01 / 07</span>
+    </section>
+
+    <!-- ══ SLIDE 2 — PROBLEM / TENSION ═══════════════════════ -->
+    <!-- Pattern: kicker → section-headline → subtitle + supporting copy -->
+    <section class="slide" id="slide-02">
+      <div class="chrome">
+      </div>
+      <span class="slide-counter">02 / 07</span>
+    </section>
+
+    <!-- ══ SLIDE 3 — STAT / MATH ══════════════════════════════ -->
+    <!-- Pattern: kicker → section-headline → equation-block OR metric-card -->
+    <section class="slide" id="slide-03">
+      <div class="chrome">
+      </div>
+      <span class="slide-counter">03 / 07</span>
+    </section>
+
+    <!-- ══ SLIDE 4 — STAT / MATH ══════════════════════════════ -->
+    <section class="slide" id="slide-04">
+      <div class="chrome">
+      </div>
+      <span class="slide-counter">04 / 07</span>
+    </section>
+
+    <!-- ══ SLIDE 5 — SYSTEM / CHECKLIST ═══════════════════════ -->
+    <!-- Pattern: kicker → section-headline → checklist OR terminal-block -->
+    <section class="slide" id="slide-05">
+      <div class="chrome">
+      </div>
+      <span class="slide-counter">05 / 07</span>
+    </section>
+
+    <!-- ══ SLIDE 6 — SOLUTION / TOOLS ════════════════════════ -->
+    <!-- Pattern: kicker → section-headline → stack-grid OR data-table -->
+    <section class="slide" id="slide-06">
+      <div class="chrome">
+      </div>
+      <span class="slide-counter">06 / 07</span>
+    </section>
+
+    <!-- ══ SLIDE 7 — CTA ══════════════════════════════════════ -->
+    <!-- Pattern: kicker → section-headline → ordered-list → closing-line (mt-auto) -->
+    <section class="slide" id="slide-07">
+      <div class="chrome">
+      </div>
+      <span class="slide-counter">07 / 07</span>
+    </section>
+
+  </main>
+</body>
+</html>
