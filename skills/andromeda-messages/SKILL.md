@@ -1,6 +1,15 @@
 ---
 name: andromeda-messages
-description: Add, update, delete, or list nodes in the Andromeda Galaxy page (mishabuloichyk.com). Also lock/unlock galaxies programmatically. Use when Michael asks to add a message, thought, or record to any galaxy — Your Dreams, Your Life, Your Partner, Your Family, Your Antidreams. Also triggers for: listing nodes, editing/deleting a node, unlocking a galaxy, checking galaxy status. Keywords: "add to andromeda", "save to galaxy", "add to dreams", "add to жизнь", "unlock your life", "разблокируй семью", "delete node", "update node".
+description: >
+  Add, update, delete, or list nodes in the Andromeda Galaxy page (mishabuloichyk.com).
+  Also lock/unlock galaxies programmatically.
+
+  Use when Michael asks to add a message/thought/record to any galaxy (Dreams, Life,
+  Partner, Family, Antidreams), or to list/edit/delete nodes, unlock a galaxy, or check
+  galaxy status.
+
+  Keywords: add to andromeda, save to galaxy, add to dreams, add to жизнь,
+  unlock your life, разблокируй семью, delete node, update node.
 ---
 
 # Andromeda Messages

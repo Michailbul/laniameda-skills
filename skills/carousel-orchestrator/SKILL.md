@@ -1,6 +1,13 @@
 ---
 name: carousel-orchestrator
-description: Orchestrate the end-to-end LinkedIn carousel creation pipeline. Use when the user asks to create, generate, or iterate on a LinkedIn carousel or branded social media slides. Handles: parsing the user request, briefing Codex (carousel-designer skill), reviewing PNG output visually, giving structured feedback for iteration, and delivering the final PDF via Telegram.
+description: >
+  Orchestrate the end-to-end LinkedIn carousel creation pipeline.
+
+  Use when the user asks to create/generate/iterate on a LinkedIn carousel or branded
+  social slides.
+
+  Handles: parse request → brief Codex (carousel-designer) → visual review → iteration
+  feedback → deliver final PDF to Telegram.
 ---
 
 # Carousel Orchestrator

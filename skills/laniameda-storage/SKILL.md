@@ -1,6 +1,17 @@
 ---
 name: laniameda-storage
-description: Save pillar-tagged prompts + reference assets from Instagram or any source into the Lania Meta Prompt Storage dashboard (Convex KB). Use when the user says "save this", "store this", "add to vault", shares a prompt/recipe/workflow, or sends reference media worth reusing later. Single item: one prompt or one asset. Batch: JSON array. Variations: same promptText + promptIngestKey across items. Never concatenate multiple distinct prompts into one promptText. ownerUserId is always read from KB_OWNER_USER_ID env var, never passed by the caller.
+description: >
+  Save pillar-tagged prompts + reference assets (from Instagram or any source) into the
+  Laniameda Prompt Storage dashboard (Convex KB).
+
+  Use when the user says "save this", "store this", "add to vault", shares a prompt/
+  recipe/workflow, or sends reference media worth reusing.
+
+  Rules: single item = one prompt or one asset. Batch = JSON array. Variations share
+  the same promptText + promptIngestKey. Never concatenate distinct prompts.
+
+  ownerUserId is always read from KB_OWNER_USER_ID env var automatically (never passed
+  by the caller).
 ---
 
 # laniameda-storage
