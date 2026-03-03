@@ -1,3 +1,15 @@
+---
+name: notion-sync
+description: >
+  Sync a task to the laniameda Notion kanban board (upsert by name).
+  Use whenever a task is created/updated/completed in pm/todos/.
+metadata:
+  requires:
+    env:
+      - NOTION_API_KEY
+      - NOTION_TASKS_DB
+---
+
 # notion-sync
 
 Sync a task to the laniameda Notion kanban board.
