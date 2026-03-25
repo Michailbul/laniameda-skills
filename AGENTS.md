@@ -35,6 +35,21 @@ _Nothing pending._
 
 ---
 
+## Special Rules
+
+### laniameda-kb — canonical source is laniameda.gallery repo
+**NOT** managed in this package. Canonical skill lives at:
+`~/work/laniameda/laniameda.gallery/skills/laniameda-kb/SKILL.md`
+
+When the gallery ingest contract changes, the skill is updated there and pushed to agent workspaces via:
+```bash
+cd ~/work/laniameda/laniameda.gallery && git pull && bun run skills:update
+```
+
+Installed agents: Lani, Meda, Crea (symlinked from `/root/.agents/skills/laniameda-kb`)
+
+---
+
 ## Changelog
 
 ### 2026-03-25 — instagram-extract
