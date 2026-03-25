@@ -1,217 +1,91 @@
 # @laniameda/skills
 
-Private agent skills for the Laniameda ecosystem. Install to Claude Code, OpenClaw, Codex, Cursor, and 40+ AI coding agents.
+Private agent skills for the Laniameda studio. Install to Claude Code, OpenClaw, Codex, Cursor, and other AI agents.
 
 ```bash
 npx skills add Michailbul/laniameda-skills
-```
-
----
-
-## Install
-
-```bash
-# Interactive — pick skills + agents + scope
-npx skills add Michailbul/laniameda-skills
-
-# Everything, everywhere, globally
-npx skills add Michailbul/laniameda-skills --all --global
-
-# One skill, specific agents
-npx skills add Michailbul/laniameda-skills --skill laniameda-brand-design -a claude-code -a openclaw
-
-# Project-local only (.claude/skills/, .agents/skills/ in cwd)
-npx skills add Michailbul/laniameda-skills --all --local
-
-# List what's available without installing
-npx skills add Michailbul/laniameda-skills --list
 ```
 
 ## Update
 
-Skills are **copied** on install. The `~/skills-lock.json` tracks source + hash per skill. To pull latest:
-
 ```bash
-npx skills update                               # all skills from all sources
-npx skills update Michailbul/laniameda-skills   # just this repo
+npx skills update Michailbul/laniameda-skills
 ```
-
-**Workflow**: edit SKILL.md → `git push` → `npx skills update` on each machine.
 
 ---
 
-## Skills
+## Skill Folders
 
-### Design & Brand
+### utility/
+General-purpose tools. No domain opinion — used by other skills as engines.
 
-| Skill | Triggers | What it does |
-|-------|----------|-------------|
-| **[laniameda-brand-design](./skills/laniameda-brand-design/)** | "design a landing page", "follow the laniameda design system", "build a page in Pencil", "use our brand colors" | Full laniameda design system (colors, typography, shadows, components) + Pencil MCP workflow for building marketing pages. Warm editorial + brutalist hybrid aesthetic. |
-| **[image-to-prompt](./skills/image-to-prompt/)** | "give me a prompt for this image", "reverse engineer this", "how do I recreate this" | Analyze an image and reverse-engineer it into a structured text-to-image prompt using the laniameda cinematic formula (Subject → Scene → Composition → Lighting → Style → Quality → Negative). |
+| Skill | What it does |
+|---|---|
+| `supadata` | Transcript + metadata from any video URL (YouTube, Instagram, TikTok, X, Facebook) |
+| `browser-use-cloud` | Cloud browser automation — authenticated sites, CAPTCHA bypass, visual extraction |
+| `deepgram-transcribe` | Audio file → text via Deepgram Nova-2 |
+| `notion-sync` | Sync tasks to laniameda Notion kanban board |
+| `repo-kanban-pm` | Install PM workflow (kanban, ROADMAP, cron review) into any repo |
+| `andromeda-messages` | CRUD for Andromeda Galaxy page nodes |
 
-### Content & Knowledge
+### ai-creatorship/
+Skills for generating and creating with AI — images, video, prompts, knowledge base.
 
-| Skill | Triggers | What it does |
-|-------|----------|-------------|
-| **[laniameda-kb](./skills/laniameda-kb/)** | "save this", "store this", "add to KB", "save to vault" | Save prompts, images, tutorials, links, and ideas to the laniameda.gallery Convex knowledge base. Auto-classifies into pillars (creators / cars / designs / dump). |
-| **[laniameda-storage](./skills/laniameda-storage/)** | "save this", "store this", "add to vault", shares a prompt or reference media | Save pillar-tagged prompts + reference assets from Instagram or any source into the Lania Meta Prompt Storage dashboard (Convex KB). |
+| Skill | What it does |
+|---|---|
+| `nano-banana-pro` | Generate/edit images with Nano Banana 2 (Gemini 3 Pro Image) |
+| `image-to-prompt` | Reverse-engineer any image into a structured cinematic prompt |
+| `ai-video-prompting` | Write AI video prompts (Kling, Seedance, Runway) |
+| `frame-vfx-stylizer` | Stylize video frame-by-frame with AI graphic effects |
+| `laniameda-kb` | Save prompts, images, tutorials to the laniameda.gallery vault |
+| `laniameda-storage` | Save pillar-tagged prompts + references to storage |
 
-### Video & Transcription
+### web-design/
+Design, visual output, and branded content production.
 
-| Skill | Triggers | What it does |
-|-------|----------|-------------|
-| **[supadata](./skills/supadata/)** | any video URL, "transcript this", "transcribe this reel", "what does she say" | Platform-agnostic transcript + metadata extraction. Supports YouTube, Instagram, TikTok, Twitter/X, Facebook. Always use before browser-use-cloud for video URLs. |
-| **[youtube-digest](./skills/youtube-digest/)** | "digest this video", "extract from this video", "learn from this", YouTube URL | Deep video digestion → extract tools, prompts, workflows, "if X then Y" mappings. Saves structured output to laniameda-hq KB. Uses Supadata as engine. |
-| **[deepgram-transcribe](./skills/deepgram-transcribe/)** | sends a voice message, "transcribe this audio" | Transcribe audio files (ogg, mp3, wav, m4a, webm) using the Deepgram Nova-2 API. |
+| Skill | What it does |
+|---|---|
+| `laniameda-brand-design` | Full laniameda design system + Pencil workflow for marketing pages |
+| `product-visual-generator` | AI product photography pipeline (Nano Banana 2 + Claude Code) |
+| `carousel-designer` | Generate branded LinkedIn carousel slides (HTML → PDF/PNG) |
+| `carousel-orchestrator` | End-to-end carousel pipeline: brief → Codex → review → deliver |
 
-### Social Media & Carousels
+### marketing/
+Content intelligence, digestion, creation, and standards.
 
-| Skill | Triggers | What it does |
-|-------|----------|-------------|
-| **[carousel-designer](./skills/carousel-designer/)** | "build a carousel", "generate slides", "LinkedIn carousel" | Generate branded LinkedIn carousel slides as a single HTML file (Tailwind, 1080x1350px, 7 slides) + PDF/PNG export via Playwright. |
-| **[carousel-orchestrator](./skills/carousel-orchestrator/)** | "create a LinkedIn carousel", "generate branded slides" | End-to-end carousel pipeline: parse request → brief Codex → visual review → iteration feedback → deliver PDF via Telegram. |
-| **[browser-use-cloud](./skills/browser-use-cloud/)** | authenticated site extraction, Instagram carousel, "scroll through this feed" | Cloud browser automation with stealth browsers, CAPTCHA solving, residential proxies. Use when Supadata fails or when authenticated multi-step browsing is needed. |
+| Skill | What it does |
+|---|---|
+| `laniameda-youtube-digest` | Watch YouTube video → extract tools/prompts/workflows → save to KB |
+| `laniameda-instagram-reel-digest` | Watch Instagram reel → extract what's actionable → save to KB |
+| `laniameda-instagram-carousel-extract` | Extract text/prompts from Instagram carousel slides → save to KB |
+| `viral-psychology-hooks` | Content ideation using neuroscience-backed viral triggers |
+| `human-copy-standards` | Copy quality gate — kills AI-speak, inflation words, filler |
+| `laniameda-hq-update` | Update studio ground truth docs when Michael shares decisions |
 
-### AI Video & Creative
+### ai-development/
+Dev infrastructure skills. *(empty — ready for new skills)*
 
-| Skill | Triggers | What it does |
-|-------|----------|-------------|
-| **[frame-vfx-stylizer](./skills/frame-vfx-stylizer/)** | "add hand-drawn overlay", "stop-motion effect", "stylize this video frame by frame", "painted brush effect" | Convert source video into stylized frame-by-frame animation. Three presets: white marker outline, painted background strokes, selective graphic fill. |
+### general/
+Anything that doesn't fit cleanly elsewhere. *(empty — ready)*
 
-### Personal & Utility
+### deprecated/
+Superseded skills kept for reference only. Do not install.
 
-| Skill | Triggers | What it does |
-|-------|----------|-------------|
-| **[andromeda-messages](./skills/andromeda-messages/)** | "add to andromeda", "save to galaxy", "add to dreams", "unlock your life" | CRUD for the Andromeda Galaxy page (mishabuloichyk.com). Add/edit/delete nodes across galaxies (Dreams, Life, Partner, Family, Antidreams). Lock/unlock galaxies. |
-
-### Developer Workflow
-
-| Skill | Triggers | What it does |
-|-------|----------|-------------|
-| **[repo-kanban-pm](./skills/repo-kanban-pm/)** | starting a new project, "set up kanban", "add PM workflow" | Install a lightweight product-management workflow inside any repo: feature kanban boards, ROADMAP status tracking, branch/PR conventions, optional daily OpenClaw cron PM review. |
-
----
-
-## Design System
-
-The repo also ships a portable **design system export** in [`design-system/`](./design-system/):
-
-```bash
-# Drop into any project
-cp -r design-system/ your-project/design-system/
-```
-
-Then in your CSS:
-```css
-@import "./design-system/tokens.css";
-```
-
-**What's inside:**
-
-| File | Purpose |
-|------|---------|
-| `tokens.css` | Drop-in CSS custom properties (all colors, type, shadows, timing) |
-| `brand.md` | Voice, tone, audience, design principles |
-| `colors.md` | Paper stack, ink scale, 12-step coral ramp, terminal colors |
-| `typography.md` | 3 font families, 7-tier scale, weights, letter spacing |
-| `shadows-elevation.md` | Dual shadow system (soft editorial + brutalist offset) |
-| `spacing-layout.md` | 4px base spacing, radius scale, grid, breakpoints |
-| `components.md` | Buttons, cards, badges, window chrome, tags, nav patterns |
-| `motion.md` | Animation tokens, easing curves, transition patterns |
-
-### Brand at a glance
-
-| Element | Value |
-|---------|-------|
-| Background | `#fffaf5` (warm parchment) |
-| Text | `#201710` (volcanic ink) |
-| Accent | `#ff7a64` (ember coral — use sparingly) |
-| Display font | Instrument Serif italic |
-| Body font | Geist Sans |
-| Label font | Geist Mono (uppercase, tracked) |
-| Brutalist shadow | `4px 4px 0 #201710` (never blur) |
-| Button shape | Pill (always) |
-| Base radius | 20px |
-
----
-
-## How skills work
-
-A skill is a `SKILL.md` file with YAML frontmatter that your AI agent reads at session start. The `description` field controls **when** the skill activates — the agent pattern-matches your request against it.
-
-```
-skills/
-└── my-skill/
-    ├── SKILL.md          ← required (name + description)
-    ├── references/       ← loaded on demand (detailed docs)
-    ├── examples/         ← code examples
-    ├── scripts/          ← executable utilities
-    └── assets/           ← templates, images, fonts
-```
-
-### Where skills get installed
-
-The `npx skills` CLI copies files to agent-specific directories:
-
-| Agent | Global path | Project path |
-|-------|-------------|-------------|
-| Claude Code | `~/.claude/skills/` | `.claude/skills/` |
-| OpenClaw | `~/.openclaw/skills/` | `.openclaw/skills/` |
-| Generic agents | `~/.agents/skills/` | `.agents/skills/` |
-| Codex, Cursor, etc. | Symlinked from `~/.agents/skills/` | — |
-
-### Manual install (no CLI)
-
-```bash
-# Clone and copy specific skills
-git clone https://github.com/Michailbul/laniameda-skills.git /tmp/laniameda-skills
-
-# Copy to all agent dirs
-for dir in ~/.claude/skills ~/.openclaw/skills ~/.agents/skills; do
-  cp -r /tmp/laniameda-skills/skills/laniameda-brand-design "$dir/"
-done
-```
+| Skill | Replaced by |
+|---|---|
+| `instagram-extract` | `laniameda-instagram-reel-digest` + `laniameda-instagram-carousel-extract` |
+| `youtube-digest` | `laniameda-youtube-digest` |
 
 ---
 
 ## Adding a new skill
 
-1. Create `skills/your-skill/SKILL.md`:
-   ```yaml
-   ---
-   name: your-skill
-   description: >-
-     What triggers this skill. Use phrases users would actually say.
-     "save this", "do that", "build X".
-   ---
-
-   # Your Skill
-
-   Instructions for the agent here...
-   ```
-
-2. Add optional `references/`, `examples/`, `scripts/` dirs
-
-3. Commit and push:
-   ```bash
-   git add skills/your-skill && git commit -m "feat: add your-skill" && git push
-   ```
-
-4. On any machine: `npx skills update Michailbul/laniameda-skills`
-
----
-
-## Third-party skills we use
-
-These are NOT in this repo — install separately:
-
-```bash
-# Marketing (32 skills — CRO, SEO, copywriting, growth)
-npx skills add coreyhaines31/marketingskills --all --global
-
-# Behavioral product design
-npx skills add refoundai/lenny-skills --all --global
-```
+1. Pick the right folder based on the skill's purpose
+2. Create `skills/<folder>/<skill-name>/SKILL.md`
+3. **`description:` frontmatter is required** — `npx skills` silently skips skills without it
+4. Update `AGENTS.md` with what changed and which agents need to act
+5. `git commit + push`
+6. Copy/symlink to relevant agent workspace(s)
 
 ---
 
