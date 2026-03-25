@@ -39,6 +39,7 @@ Skills for generating and creating with AI — images, video, prompts, knowledge
 | `ai-video-prompting` | Write AI video prompts (Kling, Seedance, Runway) |
 | `frame-vfx-stylizer` | Stylize video frame-by-frame with AI graphic effects |
 | `laniameda-kb` | Save prompts, images, tutorials to the laniameda.gallery vault |
+| `laniameda-x-post-digest` | Digest X/Twitter posts about AI creatorship — extract prompts, workflows, tools. Follows all linked resources (PDFs, videos, threads). Offers skill conversion. |
 | `laniameda-storage` | Save pillar-tagged prompts + references to storage |
 
 ### web-design/

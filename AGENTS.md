@@ -52,6 +52,12 @@ Installed agents: Lani, Meda, Crea (symlinked from `/root/.agents/skills/laniame
 
 ## Changelog
 
+### 2026-03-25 — laniameda-x-post-digest
+**Change:** Added to ai-creatorship/  
+**Agents:** Crea (primary), Lani  
+**Action:** Install in Crea + Lani workspaces — symlink from canonical  
+**Notes:** Depends on x-tweet-fetcher, supadata, browser-use-cloud, laniameda-gallery-ingest. Follows all linked resources, offers skill conversion.
+
 ### 2026-03-25 — x-tweet-fetcher
 **Change:** Added to laniameda-skills utility/ + installed in all agents  
 **Agents:** Lani ✅, Meda ✅, Crea ✅, Desi ✅, Persey ✅  
