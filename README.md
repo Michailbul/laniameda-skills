@@ -47,6 +47,7 @@ npx skills update Michailbul/laniameda-skills   # just this repo
 | Skill | Triggers | What it does |
 |-------|----------|-------------|
 | **[laniameda-brand-design](./skills/laniameda-brand-design/)** | "design a landing page", "follow the laniameda design system", "build a page in Pencil", "use our brand colors" | Full laniameda design system (colors, typography, shadows, components) + Pencil MCP workflow for building marketing pages. Warm editorial + brutalist hybrid aesthetic. |
+| **[image-to-prompt](./skills/image-to-prompt/)** | "give me a prompt for this image", "reverse engineer this", "how do I recreate this" | Analyze an image and reverse-engineer it into a structured text-to-image prompt using the laniameda cinematic formula (Subject → Scene → Composition → Lighting → Style → Quality → Negative). |
 
 ### Content & Knowledge
 
@@ -55,19 +56,33 @@ npx skills update Michailbul/laniameda-skills   # just this repo
 | **[laniameda-kb](./skills/laniameda-kb/)** | "save this", "store this", "add to KB", "save to vault" | Save prompts, images, tutorials, links, and ideas to the laniameda.gallery Convex knowledge base. Auto-classifies into pillars (creators / cars / designs / dump). |
 | **[laniameda-storage](./skills/laniameda-storage/)** | "save this", "store this", "add to vault", shares a prompt or reference media | Save pillar-tagged prompts + reference assets from Instagram or any source into the Lania Meta Prompt Storage dashboard (Convex KB). |
 
+### Video & Transcription
+
+| Skill | Triggers | What it does |
+|-------|----------|-------------|
+| **[supadata](./skills/supadata/)** | any video URL, "transcript this", "transcribe this reel", "what does she say" | Platform-agnostic transcript + metadata extraction. Supports YouTube, Instagram, TikTok, Twitter/X, Facebook. Always use before browser-use-cloud for video URLs. |
+| **[youtube-digest](./skills/youtube-digest/)** | "digest this video", "extract from this video", "learn from this", YouTube URL | Deep video digestion → extract tools, prompts, workflows, "if X then Y" mappings. Saves structured output to laniameda-hq KB. Uses Supadata as engine. |
+| **[deepgram-transcribe](./skills/deepgram-transcribe/)** | sends a voice message, "transcribe this audio" | Transcribe audio files (ogg, mp3, wav, m4a, webm) using the Deepgram Nova-2 API. |
+
 ### Social Media & Carousels
 
 | Skill | Triggers | What it does |
 |-------|----------|-------------|
 | **[carousel-designer](./skills/carousel-designer/)** | "build a carousel", "generate slides", "LinkedIn carousel" | Generate branded LinkedIn carousel slides as a single HTML file (Tailwind, 1080x1350px, 7 slides) + PDF/PNG export via Playwright. |
 | **[carousel-orchestrator](./skills/carousel-orchestrator/)** | "create a LinkedIn carousel", "generate branded slides" | End-to-end carousel pipeline: parse request → brief Codex → visual review → iteration feedback → deliver PDF via Telegram. |
+| **[browser-use-cloud](./skills/browser-use-cloud/)** | authenticated site extraction, Instagram carousel, "scroll through this feed" | Cloud browser automation with stealth browsers, CAPTCHA solving, residential proxies. Use when Supadata fails or when authenticated multi-step browsing is needed. |
+
+### AI Video & Creative
+
+| Skill | Triggers | What it does |
+|-------|----------|-------------|
+| **[frame-vfx-stylizer](./skills/frame-vfx-stylizer/)** | "add hand-drawn overlay", "stop-motion effect", "stylize this video frame by frame", "painted brush effect" | Convert source video into stylized frame-by-frame animation. Three presets: white marker outline, painted background strokes, selective graphic fill. |
 
 ### Personal & Utility
 
 | Skill | Triggers | What it does |
 |-------|----------|-------------|
 | **[andromeda-messages](./skills/andromeda-messages/)** | "add to andromeda", "save to galaxy", "add to dreams", "unlock your life" | CRUD for the Andromeda Galaxy page (mishabuloichyk.com). Add/edit/delete nodes across galaxies (Dreams, Life, Partner, Family, Antidreams). Lock/unlock galaxies. |
-| **[deepgram-transcribe](./skills/deepgram-transcribe/)** | sends a voice message, "transcribe this audio" | Transcribe audio files (ogg, mp3, wav, m4a, webm) using the Deepgram Nova-2 API. |
 
 ### Developer Workflow
 
