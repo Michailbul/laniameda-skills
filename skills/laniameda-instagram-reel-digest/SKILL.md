@@ -1,5 +1,10 @@
 ---
 name: laniameda-instagram-reel-digest
+description: >
+  Digest an Instagram reel (video with speech) so Michael doesn't have to watch it. Uses Supadata
+  for transcript first, falls back to browser-use-cloud. Extracts what's said, shown, and actionable.
+  Not for carousel posts (image slides) — use laniameda-instagram-carousel-extract for those.
+  Keywords: instagram reel, digest reel, watch this reel, extract reel, instagram video.
 version: 1.0.0
 status: active
 created: 2026-03-25

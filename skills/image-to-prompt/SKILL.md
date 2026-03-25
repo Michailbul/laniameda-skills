@@ -1,5 +1,9 @@
 ---
 name: image-to-prompt
+description: >
+  Reverse-engineer any image into a structured text-to-image prompt using the laniameda cinematic
+  formula (Subject → Scene → Composition → Lighting → Style → Quality → Negative).
+  Use when given an image and asked "give me a prompt", "how do I recreate this", or "reverse engineer this".
 version: 1.0.0
 status: active
 created: 2026-02-01

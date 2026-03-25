@@ -1,5 +1,10 @@
 ---
 name: browser-use-cloud
+description: >
+  Cloud browser automation for authenticated websites, dynamic pages, and multi-step web tasks.
+  Use when supadata fails for video/social content, or when you need to log in, scroll carousels,
+  fill forms, solve CAPTCHAs, or extract from pages that require a real browser session.
+  Keywords: browser automation, scrape authenticated site, instagram scroll, extract dynamic page.
 version: 1.0.0
 status: active
 created: 2026-02-01

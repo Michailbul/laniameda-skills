@@ -1,3 +1,26 @@
+---
+name: human-copy-standards
+description: >
+  Quality gate for all written copy. Kills inflation words, AI-speak, filler, and corporate tone.
+  Enforces human voice: direct, specific, no fluff. Apply before delivering any copy output.
+  Keywords: copy review, writing standards, kill AI speak, human voice, edit copy, no filler.
+version: 1.0.0
+status: active
+created: 2026-03-24
+updated: 2026-03-25
+owner: Meda
+agents: [Lani, Meda]
+departments: [Marketing]
+purposes: [Content Creation, Quality Control]
+tags:
+  - copywriting
+  - quality-gate
+  - brand-voice
+  - human-copy
+depends_on: []
+replaces: []
+---
+
 # SKILL: human-copy-standards
 
 ## Trigger

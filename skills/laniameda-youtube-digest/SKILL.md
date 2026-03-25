@@ -1,5 +1,9 @@
 ---
 name: laniameda-youtube-digest
+description: >
+  Watch a YouTube video so Michael doesn't have to. Extract what's actionable — tools, prompts,
+  workflows, "if X then Y" mappings — and save to KB. Uses Supadata API for transcripts.
+  Keywords: digest video, watch this, youtube extract, video summary, youtube transcript.
 version: 2.0.0
 status: active
 created: 2026-02-01

@@ -1,5 +1,9 @@
 ---
 name: supadata
+description: >
+  Extract transcripts and metadata from any video URL — Instagram, TikTok, YouTube, Twitter/X,
+  Facebook — without opening a browser. Always try this FIRST before browser-use-cloud.
+  Keywords: transcript, video metadata, supadata, transcribe video, youtube transcript, tiktok transcript.
 version: 1.0.0
 status: active
 created: 2026-03-24

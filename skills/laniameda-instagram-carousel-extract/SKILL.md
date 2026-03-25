@@ -1,5 +1,10 @@
 ---
 name: laniameda-instagram-carousel-extract
+description: >
+  Extract content from Instagram carousel posts (image slides) using browser-use-cloud with visual
+  reading. Read text overlaid on slides, extract prompts, workflows, checklists — and save to KB.
+  Not for reels (video) — use laniameda-instagram-reel-digest for those.
+  Keywords: instagram carousel, extract slides, read carousel, save carousel.
 version: 1.0.0
 status: active
 created: 2026-03-25

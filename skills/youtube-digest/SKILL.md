@@ -1,5 +1,8 @@
 ---
 name: youtube-digest
+description: >
+  DEPRECATED — use laniameda-youtube-digest instead. Old YouTube video digestion skill kept for
+  backwards compatibility.
 version: 1.1.0
 status: deprecated
 created: 2026-02-01

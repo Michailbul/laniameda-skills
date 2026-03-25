@@ -1,5 +1,9 @@
 ---
 name: frame-vfx-stylizer
+description: >
+  Convert source video into stylized frame-by-frame mixed-media animation using AI image editing.
+  Three presets: white marker outline, painted background strokes, selective graphic fill.
+  Use when asked to stylize a video frame-by-frame, add stop-motion effects, or create animated sketch overlays.
 version: 1.0.0
 status: draft
 created: 2026-03-24
