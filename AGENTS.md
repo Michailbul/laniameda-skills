@@ -52,6 +52,11 @@ Installed agents: Lani, Meda, Crea (symlinked from `/root/.agents/skills/laniame
 
 ## Changelog
 
+### 2026-03-25 — crea-cinematic-prompts, parallel-deep-research, parallel-web-search, social-media-carousels
+**Change:** Added to repo (were installed in workspaces but missing from canonical source)  
+**Agents:** Already installed — no action needed  
+**Notes:** crea-cinematic-prompts → ai-creatorship/; parallel-* → utility/; social-media-carousels → web-design/
+
 ### 2026-03-25 — laniameda-x-post-digest
 **Change:** Added to ai-creatorship/  
 **Agents:** Crea (primary), Lani  

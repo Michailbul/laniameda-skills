@@ -28,6 +28,8 @@ General-purpose tools. No domain opinion — used by other skills as engines.
 | `repo-kanban-pm` | Install PM workflow (kanban, ROADMAP, cron review) into any repo |
 | `andromeda-messages` | CRUD for Andromeda Galaxy page nodes |
 | `x-tweet-fetcher` | Fetch tweets, reply threads, and user timelines from X/Twitter — no login, no API key. Includes X-Tracker for viral growth monitoring. |
+| `parallel-deep-research` | Deep multi-source web research via Parallel AI — parallel query execution, synthesis across sources. |
+| `parallel-web-search` | Fast web search via Parallel AI — multiple queries in parallel, structured results. |
 
 ### ai-creatorship/
 Skills for generating and creating with AI — images, video, prompts, knowledge base.
@@ -40,6 +42,7 @@ Skills for generating and creating with AI — images, video, prompts, knowledge
 | `frame-vfx-stylizer` | Stylize video frame-by-frame with AI graphic effects |
 | `laniameda-kb` | Save prompts, images, tutorials to the laniameda.gallery vault |
 | `laniameda-x-post-digest` | Digest X/Twitter posts about AI creatorship — extract prompts, workflows, tools. Follows all linked resources (PDFs, videos, threads). Offers skill conversion. |
+| `crea-cinematic-prompts` | Turn a concept into cinematic AI still + video prompts using structured semantic control (subject, scene, composition, lighting, style, constraints). |
 | `laniameda-storage` | Save pillar-tagged prompts + references to storage |
 
 ### web-design/
@@ -51,6 +54,7 @@ Design, visual output, and branded content production.
 | `product-visual-generator` | AI product photography pipeline (Nano Banana 2 + Claude Code) |
 | `carousel-designer` | Generate branded LinkedIn carousel slides (HTML → PDF/PNG) |
 | `carousel-orchestrator` | End-to-end carousel pipeline: brief → Codex → review → deliver |
+| `social-media-carousels` | Design and produce high-engagement social media carousel slides as rendered HTML images. No external dependencies. |
 
 ### marketing/
 Content intelligence, digestion, creation, and standards.
