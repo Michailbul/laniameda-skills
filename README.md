@@ -27,6 +27,7 @@ General-purpose tools. No domain opinion — used by other skills as engines.
 | `notion-sync` | Sync tasks to laniameda Notion kanban board |
 | `repo-kanban-pm` | Install PM workflow (kanban, ROADMAP, cron review) into any repo |
 | `andromeda-messages` | CRUD for Andromeda Galaxy page nodes |
+| `x-tweet-fetcher` | Fetch tweets, reply threads, and user timelines from X/Twitter — no login, no API key. Includes X-Tracker for viral growth monitoring. |
 
 ### ai-creatorship/
 Skills for generating and creating with AI — images, video, prompts, knowledge base.

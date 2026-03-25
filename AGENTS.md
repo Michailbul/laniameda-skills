@@ -52,6 +52,12 @@ Installed agents: Lani, Meda, Crea (symlinked from `/root/.agents/skills/laniame
 
 ## Changelog
 
+### 2026-03-25 — x-tweet-fetcher
+**Change:** Added to laniameda-skills utility/ + installed in all agents  
+**Agents:** Lani ✅, Meda ✅, Crea ✅, Desi ✅, Persey ✅  
+**Action:** Already done — symlinked from `/root/.agents/skills/x-tweet-fetcher`  
+**Notes:** No login, no API key. FxTwitter proxy for basic tweets. Camofox for replies/timelines. Includes X-Tracker for viral growth monitoring.
+
 ### 2026-03-25 — instagram-extract
 **Change:** Deprecated + removed from workspaces  
 **Agents:** Lani, Meda — removed  
