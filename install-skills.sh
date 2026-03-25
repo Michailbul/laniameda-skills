@@ -1,66 +1,89 @@
 #!/bin/bash
-# install-skills.sh — Install all laniameda skills globally via npx skills
-# Handles the nested skills/<category>/<skill>/ structure that npx skills can't discover.
-# Creates a temp flattened copy, installs from there, cleans up.
+# install-skills.sh — Sync laniameda skills directly to ~/.agents/skills/
 #
-# Usage: ./install-skills.sh
+# Copies all skill folders from this repo (including nested skills/<category>/<skill>/)
+# into ~/.agents/skills/<skill-name>/. Claude Code and other agents pick them up
+# via existing symlinks from ~/.claude/skills/ → ~/.agents/skills/.
+#
+# For new skills that don't have symlinks yet, creates them.
+#
+# Usage:
+#   ./install-skills.sh          # sync all skills
+#   ./install-skills.sh supadata # sync one skill
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-TMP_DIR=$(mktemp -d)
+AGENTS_DIR="$HOME/.agents/skills"
+CLAUDE_DIR="$HOME/.claude/skills"
+TARGET_SKILL="${1:-}"
 
-echo "📦 Preparing laniameda skills for installation..."
+mkdir -p "$AGENTS_DIR" "$CLAUDE_DIR"
 
-# Copy root-level skills (e.g. design-thinking-partner)
-for dir in "$SCRIPT_DIR"/*/; do
-  skill_name=$(basename "$dir")
-  # Skip non-skill directories
-  [[ "$skill_name" == "skills" || "$skill_name" == "design-system" || "$skill_name" == "deprecated" ]] && continue
-  # Only copy if it contains SKILL.md
-  if [[ -f "$dir/SKILL.md" ]]; then
-    cp -r "$dir" "$TMP_DIR/$skill_name"
+updated=0
+created=0
+skipped=0
+
+sync_skill() {
+  local src="$1"
+  local name=$(basename "$src")
+
+  # Copy to ~/.agents/skills/
+  if [[ -d "$AGENTS_DIR/$name" ]]; then
+    rm -rf "$AGENTS_DIR/$name"
   fi
+  cp -r "$src" "$AGENTS_DIR/$name"
+
+  # Ensure symlink exists in ~/.claude/skills/
+  if [[ -L "$CLAUDE_DIR/$name" ]]; then
+    ((updated++))
+    echo "  updated: $name"
+  elif [[ -d "$CLAUDE_DIR/$name" ]]; then
+    # Real dir exists (not symlink) — replace with symlink
+    rm -rf "$CLAUDE_DIR/$name"
+    ln -s "../../.agents/skills/$name" "$CLAUDE_DIR/$name"
+    ((updated++))
+    echo "  updated: $name (relinked)"
+  else
+    ln -s "../../.agents/skills/$name" "$CLAUDE_DIR/$name"
+    ((created++))
+    echo "  new:     $name"
+  fi
+}
+
+echo "Syncing laniameda skills..."
+echo ""
+
+# Collect all skill paths
+declare -a skill_paths=()
+
+# Root-level skills (e.g. design-thinking-partner)
+for dir in "$SCRIPT_DIR"/*/; do
+  name=$(basename "$dir")
+  [[ "$name" == "skills" || "$name" == "design-system" ]] && continue
+  [[ -f "$dir/SKILL.md" ]] && skill_paths+=("$dir")
 done
 
-# Flatten nested skills/<category>/<skill>/ to root level
+# Nested skills/<category>/<skill>/
 if [[ -d "$SCRIPT_DIR/skills" ]]; then
   for category_dir in "$SCRIPT_DIR/skills"/*/; do
     category=$(basename "$category_dir")
-    # Skip deprecated skills
     [[ "$category" == "deprecated" ]] && continue
     for skill_dir in "$category_dir"*/; do
-      skill_name=$(basename "$skill_dir")
-      if [[ -f "$skill_dir/SKILL.md" ]]; then
-        cp -r "$skill_dir" "$TMP_DIR/$skill_name"
-      fi
+      [[ -f "$skill_dir/SKILL.md" ]] && skill_paths+=("$skill_dir")
     done
   done
 fi
 
-# Count what we found
-skill_count=$(find "$TMP_DIR" -maxdepth 2 -name "SKILL.md" | wc -l | tr -d ' ')
-echo "Found $skill_count skills to install."
-
-if [[ "$skill_count" -eq 0 ]]; then
-  echo "No skills found. Exiting."
-  rm -rf "$TMP_DIR"
-  exit 1
-fi
-
-# List them
-echo ""
-for skill_dir in "$TMP_DIR"/*/; do
-  if [[ -f "$skill_dir/SKILL.md" ]]; then
-    echo "  $(basename "$skill_dir")"
+# Sync
+for skill_path in "${skill_paths[@]}"; do
+  name=$(basename "$skill_path")
+  if [[ -n "$TARGET_SKILL" && "$name" != "$TARGET_SKILL" ]]; then
+    ((skipped++))
+    continue
   fi
+  sync_skill "$skill_path"
 done
+
 echo ""
-
-# Install globally
-echo "Installing to all agents..."
-npx skills add "$TMP_DIR" --all --global
-
-# Clean up
-rm -rf "$TMP_DIR"
-echo "Done. Temp files cleaned up."
+echo "Done. $updated updated, $created new, $skipped skipped."
