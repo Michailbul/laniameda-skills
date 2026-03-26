@@ -18,6 +18,17 @@ bun run ~/.agents/skills/laniameda-kb/scripts/ingest.ts '{
 }'
 ```
 
+## 1b) Explicit prompt-only save
+
+```bash
+bun run ~/.agents/skills/laniameda-kb/scripts/ingest.ts '{
+  "pillar": "creators",
+  "promptText": "cinematic fashion portrait in tokyo rain",
+  "allowPromptOnly": true,
+  "promptType": "image_gen"
+}'
+```
+
 ## 2) Design inspiration only
 
 ```bash
@@ -80,10 +91,11 @@ bun run ~/.agents/skills/laniameda-kb/scripts/ingest.ts '{
 
 ## 5) Direct Convex action contract summary
 
-The underlying `ingest:ingestFromApi` action currently accepts:
+The underlying `ingest:ingestFromApi` action accepts:
 
 - `ownerUserId`
 - `promptText`
+- `allowPromptOnly` (required when saving prompt text without media or design inspiration)
 - `url`
 - `file`
 - `tagNames`
@@ -113,3 +125,52 @@ It returns:
   "designInspirationId": "optional"
 }
 ```
+
+## 6) Update a prompt by ingestKey
+
+```bash
+bun run ~/.agents/skills/laniameda-kb/scripts/ingest.ts '{
+  "operation": "update",
+  "target": "prompt",
+  "ingestKey": "cars:porsche:rolling:v1",
+  "promptText": "low-angle porsche rolling shot at blue hour",
+  "tagNames": ["prompts", "cars", "porsche", "blue-hour"],
+  "modelName": "gpt-image-1"
+}'
+```
+
+## 7) Update an asset's metadata and clear its folder
+
+```bash
+bun run ~/.agents/skills/laniameda-kb/scripts/ingest.ts '{
+  "operation": "update",
+  "target": "asset",
+  "ingestKey": "cars:porsche:rolling:v1:a",
+  "folderId": null,
+  "tagNames": ["cars", "porsche", "hero-shot"],
+  "assetRole": "reference"
+}'
+```
+
+## 8) Delete a design inspiration by ingestKey
+
+```bash
+bun run ~/.agents/skills/laniameda-kb/scripts/ingest.ts '{
+  "operation": "delete",
+  "target": "designInspiration",
+  "ingestKey": "design:stripe:pricing:v1"
+}'
+```
+
+## 9) Update/delete contract summary
+
+- `updateFromApi`
+  - Requires `target`
+  - Requires either `id` or `ingestKey`
+  - Supports `prompt`, `asset`, and `designInspiration`
+  - Asset updates are metadata-only; media replacement is not supported
+
+- `deleteFromApi`
+  - Requires `target`
+  - Requires either `id` or `ingestKey`
+  - Returns `deleted: false` when the target is already absent
