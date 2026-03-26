@@ -66,7 +66,7 @@ If skipping: one line — what it is and why it's not worth digesting.
 
 ### Step 1 — Fetch the Tweet
 
-Use `x-tweet-fetcher`:
+Use `x-tweet-fetcher` — full reference: `references/x-tweet-fetcher.md`.
 ```bash
 python3 ~/.agents/skills/x-tweet-fetcher/scripts/fetch_tweet.py \
   --url "<TWEET_URL>" --pretty
@@ -105,7 +105,7 @@ This is mandatory. Tweets are often teasers — the real technique is in what th
 
 | Link type | How to handle |
 |-----------|--------------|
-| YouTube video | Spawn subagent: run `crea-youtube-learn` on the URL |
+| YouTube video | Spawn subagent: run `crea-youtube-learn` on the URL (uses `references/supadata.md`) |
 | Another tweet / thread | Spawn subagent: run `crea-x-learn` recursively, depth max 2 |
 | Instagram reel | Spawn subagent: run `laniameda-instagram-reel-digest` |
 | Instagram carousel | Spawn subagent: run `laniameda-instagram-carousel-extract` |
@@ -180,13 +180,13 @@ Symlinked to: `/root/.openclaw/workspace-crea/skills/<skill-name>`
 
 ## Tool Belt
 
-| Need | Tool |
-|------|------|
-| Fetch tweet + extract text | `x-tweet-fetcher` — `scripts/fetch_tweet.py` |
-| YouTube in linked resources | spawn subagent → `crea-youtube-learn` |
-| Nested tweet / thread | spawn subagent → `crea-x-learn` (max depth 2) |
-| Instagram reel in links | spawn subagent → `laniameda-instagram-reel-digest` |
-| Instagram carousel in links | spawn subagent → `laniameda-instagram-carousel-extract` |
-| Web pages, articles, PDFs | `web_fetch` |
-| Gated / authenticated pages | `browser-use-cloud` |
-| Convert to skill | `skill-creator` (after Michael approves) |
+| Need | Tool | Reference |
+|------|------|-----------|
+| Fetch tweet + extract text | `x-tweet-fetcher` — `scripts/fetch_tweet.py` | `references/x-tweet-fetcher.md` |
+| YouTube in linked resources | spawn subagent → `crea-youtube-learn` | `references/supadata.md` |
+| Nested tweet / thread | spawn subagent → `crea-x-learn` (max depth 2) | `references/x-tweet-fetcher.md` |
+| Instagram reel in links | spawn subagent → `laniameda-instagram-reel-digest` | — |
+| Instagram carousel in links | spawn subagent → `laniameda-instagram-carousel-extract` | — |
+| Web pages, articles, PDFs | `web_fetch` | — |
+| Gated / authenticated pages | `browser-use-cloud` | — |
+| Convert to skill | `skill-creator` (after Michael approves) | `references/skill-upgrade-protocol.md` |
