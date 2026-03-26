@@ -32,7 +32,7 @@ depends_on: [supadata]
 
 **Purpose:** Watch a YouTube video about AI creative tools or techniques. Extract what actually upgrades Crea's craft. If the video teaches something worth encoding — update or create a skill.
 
-**Engine:** Supadata API (`supadata` skill).
+**Engine:** `supadata` skill handles all transcript and metadata fetching. Read `supadata/SKILL.md` for full API reference. Key decision: use **Transcript** for narrated content; use **Extract** (vision) when prompts/settings are shown on screen but not spoken aloud (e.g. ComfyUI node graphs, Midjourney UI, on-screen prompt text).
 
 ---
 
@@ -68,18 +68,13 @@ What Crea is hunting for:
 ## Workflow
 
 ### Step 1 — Fetch metadata
-```bash
-curl -s "https://api.supadata.ai/v1/youtube/video?id=<VIDEO_ID>" \
-  -H "x-api-key: $SUPADATA_API_KEY"
-```
-Check description for linked prompts, swipe files, preset downloads, "link in bio" resources → fetch with `web_fetch` if relevant.
+Use `supadata` skill → `/youtube/video` endpoint. Check description for linked prompts, swipe files, preset downloads, "link in bio" resources → fetch with `web_fetch` if relevant.
 
-### Step 2 — Fetch transcript
-```bash
-curl -s "https://api.supadata.ai/v1/youtube/transcript?url=<URL>&text=true" \
-  -H "x-api-key: $SUPADATA_API_KEY"
-```
-If language fails → retry without `lang` param.
+### Step 2 — Fetch transcript or extract
+Use `supadata` skill:
+- **Narrated content** → `/youtube/transcript?url=<URL>&text=true` (native captions, 1 credit)
+- **Visual-heavy tutorial** (prompts on screen, UI demos, ComfyUI graphs) → `/extract` with vision (see supadata skill for schema). Use when important technique content is shown but not spoken.
+- If transcript returns no content → retry without `lang` param, or fall back to Extract.
 
 ### Step 3 — Fast verdict (deliver this first, always)
 
