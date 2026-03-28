@@ -1,11 +1,10 @@
 #!/bin/bash
-# install-skills.sh — Sync laniameda skills directly to ~/.agents/skills/
+# install-skills.sh — Sync laniameda skills to ~/.agents/skills/ and ~/.claude/skills/
 #
 # Copies all skill folders from this repo (including nested skills/<category>/<skill>/)
-# into ~/.agents/skills/<skill-name>/. Claude Code and other agents pick them up
-# via existing symlinks from ~/.claude/skills/ → ~/.agents/skills/.
-#
-# For new skills that don't have symlinks yet, creates them.
+# into both ~/.agents/skills/<skill-name>/ and ~/.claude/skills/<skill-name>/ as real
+# directories (no symlinks). This ensures compatibility with tools like Cowork that
+# cannot resolve symlinks through mounted filesystems.
 #
 # Usage:
 #   ./install-skills.sh          # sync all skills
@@ -32,20 +31,23 @@ sync_skill() {
   if [[ -d "$AGENTS_DIR/$name" ]]; then
     rm -rf "$AGENTS_DIR/$name"
   fi
-  cp -r "$src" "$AGENTS_DIR/$name"
+  # Use rsync to skip broken symlinks (some reference VPS paths)
+  rsync -a --safe-links "$src/" "$AGENTS_DIR/$name/"
 
-  # Ensure symlink exists in ~/.claude/skills/
+  # Copy to ~/.claude/skills/ as a real directory (no symlinks — required for Cowork)
   if [[ -L "$CLAUDE_DIR/$name" ]]; then
+    # Was a symlink before — remove and replace with real copy
+    rm "$CLAUDE_DIR/$name"
+    rsync -a --safe-links "$src/" "$CLAUDE_DIR/$name/"
+    ((updated++))
+    echo "  updated: $name (replaced symlink with real dir)"
+  elif [[ -d "$CLAUDE_DIR/$name" ]]; then
+    rm -rf "$CLAUDE_DIR/$name"
+    rsync -a --safe-links "$src/" "$CLAUDE_DIR/$name/"
     ((updated++))
     echo "  updated: $name"
-  elif [[ -d "$CLAUDE_DIR/$name" ]]; then
-    # Real dir exists (not symlink) — replace with symlink
-    rm -rf "$CLAUDE_DIR/$name"
-    ln -s "../../.agents/skills/$name" "$CLAUDE_DIR/$name"
-    ((updated++))
-    echo "  updated: $name (relinked)"
   else
-    ln -s "../../.agents/skills/$name" "$CLAUDE_DIR/$name"
+    rsync -a --safe-links "$src/" "$CLAUDE_DIR/$name/"
     ((created++))
     echo "  new:     $name"
   fi
