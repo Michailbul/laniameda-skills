@@ -1,1 +1,0 @@
-/root/work/laniameda/laniameda-hq/laniameda-skills/skills/ai-creatorship/crea-x-learn/references/extraction-standards.md

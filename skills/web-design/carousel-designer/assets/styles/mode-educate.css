@@ -1,0 +1,282 @@
+/* ═══════════════════════════════════════════════════════════
+   MODE: EDUCATE — Tutorials, How-Tos, Listicles, Workflows
+   Structured content with clear hierarchy and progression.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Step Number ── */
+/* Accent chip specifically for step counts */
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: var(--accent-glow);
+  border: 1px solid var(--accent-border);
+  border-radius: 16px;
+  font-family: var(--font-code);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent-bright);
+  box-shadow:
+    0 0 16px rgba(99, 102, 241, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+/* Large step number for hero step slides */
+.step-number-lg {
+  width: 72px;
+  height: 72px;
+  font-size: 32px;
+  border-radius: 20px;
+}
+
+/* Inline step label "STEP 01" */
+.step-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-code);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.step-label .step-label-num {
+  color: var(--accent-bright);
+}
+
+/* ── Content Card ── */
+/* Glass card wrapper for each content block / tip / item */
+.edu-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid var(--border-default);
+  border-top-color: rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 36px 40px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Compact card variant for list items */
+.edu-card-compact {
+  padding: 24px 28px;
+  border-radius: 16px;
+}
+
+/* Card with left accent border */
+.edu-card-accent {
+  border-left: 3px solid var(--accent-solid);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/* ── Bullet List ── */
+/* Vertical list with accent dots */
+.edu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.edu-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.edu-list-item .accent-dot {
+  margin-top: 14px; /* Align with first line of text */
+}
+
+.edu-list-item-text {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.edu-list-item-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ── Numbered List ── */
+/* For ordered steps within a single slide */
+.edu-numbered-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  counter-reset: edu-step;
+}
+
+.edu-numbered-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  counter-increment: edu-step;
+}
+
+.edu-numbered-item::before {
+  content: counter(edu-step, decimal-leading-zero);
+  font-family: var(--font-code);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent-bright);
+  padding-top: 8px;
+  flex-shrink: 0;
+  min-width: 32px;
+}
+
+/* ── Code Snippet ── */
+/* Inline code within text */
+.edu-inline-code {
+  font-family: var(--font-code);
+  font-size: 0.85em;
+  background: rgba(99, 102, 241, 0.10);
+  border: 1px solid rgba(99, 102, 241, 0.20);
+  border-radius: 8px;
+  padding: 4px 12px;
+  color: var(--accent-text);
+}
+
+/* ── Callout Box ── */
+/* Highlighted info / tip / warning */
+.edu-callout {
+  display: flex;
+  gap: 20px;
+  background: rgba(99, 102, 241, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  border-radius: 16px;
+  padding: 28px 32px;
+}
+
+.edu-callout-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.edu-callout-text {
+  font-family: var(--font-body);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* ── Key-Value Row ── */
+/* For showing settings, properties, or comparisons */
+.edu-kv-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.edu-kv-row:last-child {
+  border-bottom: none;
+}
+
+.edu-kv-key {
+  font-family: var(--font-body);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+.edu-kv-value {
+  font-family: var(--font-code);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--accent-text);
+}
+
+/* ── Progress Tracker ── */
+/* Horizontal progress bar specific to educate mode */
+.edu-progress {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+}
+
+.edu-progress-seg {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.edu-progress-seg.active {
+  background: var(--accent-bright);
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
+}
+
+.edu-progress-seg.past {
+  background: rgba(99, 102, 241, 0.30);
+}
+
+/* ── Educate Slide Layouts ── */
+
+/* Hook slide — hero headline centered */
+.edu-hook .safe-zone {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: var(--s1);
+}
+
+/* Step slide — step label top, headline, body */
+.edu-step .safe-zone {
+  gap: var(--s1);
+  padding-top: var(--s1);
+}
+
+/* List slide — headline + stacked items */
+.edu-list-slide .safe-zone {
+  gap: var(--s2);
+}
+
+/* Stats slide — hero number centered */
+.edu-stats .safe-zone {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: var(--s1);
+}
+
+.edu-stats .type-stat {
+  color: var(--accent-bright);
+}
+
+/* ── Topic Tag ── */
+/* Category label at top of slides */
+.edu-topic-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-code);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-quaternary);
+}
+
+.edu-topic-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-solid);
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.4);
+}

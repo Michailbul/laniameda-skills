@@ -1,1 +1,0 @@
-/root/work/laniameda/laniameda-hq/laniameda-skills/skills/ai-creatorship/crea-youtube-learn/references/skill-upgrade-protocol.md

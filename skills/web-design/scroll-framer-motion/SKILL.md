@@ -1,5 +1,5 @@
 ---
-name: scroll-motion
+name: scroll-framer-motion
 description: "Framer Motion / Motion scroll animation skill for React projects. Covers useScroll, useTransform, useSpring, whileInView, parallax, horizontal scroll, sticky sections, text reveals, and staggered animations — all without GSAP. React-idiomatic scroll experiences using Motion + CSS sticky + Lenis. Use when: Framer Motion scroll, Motion scroll, React scroll animation, useScroll, whileInView, React parallax, scroll animation without GSAP. For GSAP-based scroll with ScrollTrigger/pinning/image sequences, use scroll-experience skill instead."
 ---
 

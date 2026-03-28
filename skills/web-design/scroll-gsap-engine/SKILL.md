@@ -1,5 +1,5 @@
 ---
-name: scroll-experience
+name: scroll-gsap-engine
 description: "GSAP ScrollTrigger master skill for building award-winning scroll-driven websites. Covers GSAP ScrollTrigger, Lenis smooth scroll, CSS scroll-driven animations, pinned sections, horizontal scroll, parallax, image sequences, text split reveals, and section transitions. Enforces performance rules, accessibility, and mobile-first architecture. Use when: GSAP, ScrollTrigger, Lenis, pinned scroll, scroll hijack, image sequence, SplitText, cinematic website, Apple-style scroll, dreamy scroll, scroll animation with GSAP. For React-only scroll with Framer Motion, use scroll-motion skill instead."
 ---
 

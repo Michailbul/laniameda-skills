@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educate Carousel</title>
+  <link rel="stylesheet" href="../styles/carousel-base.css">
+  <link rel="stylesheet" href="../styles/mode-educate.css">
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     SLIDE 1 — Hook
+     ════════════════════════════════════════ -->
+<div class="slide" id="slide-1">
+  <div class="safe-zone" style="justify-content:center; align-items:center; text-align:center; gap:32px;">
+
+    <!-- Topic tag -->
+    <div class="edu-topic-tag">WORKFLOW</div>
+
+    <!-- Headline -->
+    <h1 class="type-hero gradient-text" style="max-width:850px;">
+      5 Claude Code Skills You Need
+    </h1>
+
+    <!-- Subheadline -->
+    <p class="type-body" style="max-width:680px;">
+      Stop writing boilerplate. Let skills handle the heavy lifting.
+    </p>
+
+    <!-- Accent line -->
+    <div class="accent-line"></div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="slide-footer">
+    <span class="slide-handle">@yourhandle</span>
+    <div class="edu-progress">
+      <div class="edu-progress-seg active"></div>
+      <div class="edu-progress-seg"></div>
+      <div class="edu-progress-seg"></div>
+      <div class="edu-progress-seg"></div>
+      <div class="edu-progress-seg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SLIDE 2 — Step 1
+     ════════════════════════════════════════ -->
+<div class="slide" id="slide-2">
+  <div class="safe-zone" style="gap:36px; padding-top:24px;">
+
+    <!-- Step header -->
+    <div style="display:flex; align-items:center; gap:24px;">
+      <div class="step-number-lg">01</div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <h2 class="type-h1">Create a Skill File</h2>
+        <p class="type-body" style="max-width:700px;">
+          Every skill starts with a <span class="edu-inline-code">SKILL.md</span> in your skills directory.
+        </p>
+      </div>
+    </div>
+
+    <!-- Code block -->
+    <div class="code-block" style="flex:1;">
+      <span class="code-comment"># Create the skill structure</span><br><br>
+      <span class="code-keyword">mkdir</span> -p ~/.claude/skills/my-skill<br><br>
+      <span class="code-keyword">cat</span> > ~/.claude/skills/my-skill/<span class="code-path">SKILL.md</span> << 'EOF'<br>
+      ---<br>
+      <span class="code-string">name: my-skill</span><br>
+      <span class="code-string">description: What it does</span><br>
+      ---<br>
+      <span class="code-comment"># Instructions here</span><br>
+      EOF
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="slide-footer">
+    <span class="slide-handle">@yourhandle</span>
+    <div class="edu-progress">
+      <div class="edu-progress-seg past"></div>
+      <div class="edu-progress-seg active"></div>
+      <div class="edu-progress-seg"></div>
+      <div class="edu-progress-seg"></div>
+      <div class="edu-progress-seg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SLIDE 3 — Step 2 (List Slide)
+     ════════════════════════════════════════ -->
+<div class="slide" id="slide-3">
+  <div class="safe-zone" style="gap:36px; padding-top:24px;">
+
+    <!-- Step label -->
+    <div class="step-label">STEP <span class="step-label-num">02</span></div>
+
+    <!-- Headline -->
+    <h2 class="type-h1">Define Your Components</h2>
+
+    <!-- List in cards -->
+    <div style="display:flex; flex-direction:column; gap:20px; flex:1;">
+
+      <div class="edu-card edu-card-compact" style="display:flex; align-items:center; gap:20px;">
+        <div class="accent-dot"></div>
+        <div>
+          <p style="font-family:var(--font-body); font-size:30px; font-weight:600; color:var(--text-primary);">Templates</p>
+          <p style="font-family:var(--font-body); font-size:24px; color:var(--text-tertiary); margin-top:6px;">Reusable HTML structures for each output type</p>
+        </div>
+      </div>
+
+      <div class="edu-card edu-card-compact" style="display:flex; align-items:center; gap:20px;">
+        <div class="accent-dot"></div>
+        <div>
+          <p style="font-family:var(--font-body); font-size:30px; font-weight:600; color:var(--text-primary);">Style Sheets</p>
+          <p style="font-family:var(--font-body); font-size:24px; color:var(--text-tertiary); margin-top:6px;">CSS design tokens and component classes</p>
+        </div>
+      </div>
+
+      <div class="edu-card edu-card-compact" style="display:flex; align-items:center; gap:20px;">
+        <div class="accent-dot"></div>
+        <div>
+          <p style="font-family:var(--font-body); font-size:30px; font-weight:600; color:var(--text-primary);">Scripts</p>
+          <p style="font-family:var(--font-body); font-size:24px; color:var(--text-tertiary); margin-top:6px;">Export pipelines that turn designs into assets</p>
+        </div>
+      </div>
+
+      <div class="edu-card edu-card-compact" style="display:flex; align-items:center; gap:20px;">
+        <div class="accent-dot"></div>
+        <div>
+          <p style="font-family:var(--font-body); font-size:30px; font-weight:600; color:var(--text-primary);">References</p>
+          <p style="font-family:var(--font-body); font-size:24px; color:var(--text-tertiary); margin-top:6px;">Brand kit, inspirations, and proven patterns</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="slide-footer">
+    <span class="slide-handle">@yourhandle</span>
+    <div class="edu-progress">
+      <div class="edu-progress-seg past"></div>
+      <div class="edu-progress-seg past"></div>
+      <div class="edu-progress-seg active"></div>
+      <div class="edu-progress-seg"></div>
+      <div class="edu-progress-seg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SLIDE 4 — Stats Slide
+     ════════════════════════════════════════ -->
+<div class="slide" id="slide-4">
+  <div class="safe-zone" style="justify-content:center; align-items:center; text-align:center; gap:32px;">
+
+    <!-- Stat number -->
+    <p class="type-stat gradient-text-accent">10x</p>
+
+    <!-- Context -->
+    <p class="type-body-lg" style="max-width:700px;">
+      faster output when your skill has a proper design system and export pipeline
+    </p>
+
+    <!-- Divider -->
+    <div class="divider" style="max-width:200px;"></div>
+
+    <!-- Supporting -->
+    <p class="type-caption">Measured across 50+ carousel generations</p>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="slide-footer">
+    <span class="slide-handle">@yourhandle</span>
+    <div class="edu-progress">
+      <div class="edu-progress-seg past"></div>
+      <div class="edu-progress-seg past"></div>
+      <div class="edu-progress-seg past"></div>
+      <div class="edu-progress-seg active"></div>
+      <div class="edu-progress-seg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SLIDE 5 — CTA
+     ════════════════════════════════════════ -->
+<div class="slide" id="slide-5">
+  <div class="safe-zone" style="justify-content:center; align-items:center; text-align:center; gap:48px;">
+
+    <!-- Accent line -->
+    <div class="accent-line" style="width:64px;"></div>
+
+    <!-- CTA -->
+    <div style="display:flex; flex-direction:column; gap:20px; align-items:center;">
+      <h2 class="type-h1 gradient-text">Save this for later</h2>
+      <p class="type-body" style="max-width:680px;">
+        Follow for more Claude Code workflows, skills, and dev tips.
+      </p>
+    </div>
+
+    <!-- Action -->
+    <div class="accent-chip accent-chip-lg">FOLLOW @YOURHANDLE</div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="slide-footer">
+    <span class="slide-handle">@yourhandle</span>
+    <div class="edu-progress">
+      <div class="edu-progress-seg past"></div>
+      <div class="edu-progress-seg past"></div>
+      <div class="edu-progress-seg past"></div>
+      <div class="edu-progress-seg past"></div>
+      <div class="edu-progress-seg active"></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

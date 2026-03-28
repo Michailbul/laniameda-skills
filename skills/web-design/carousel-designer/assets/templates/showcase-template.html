@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Showcase Carousel</title>
+  <link rel="stylesheet" href="../styles/carousel-base.css">
+  <link rel="stylesheet" href="../styles/mode-showcase.css">
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     SLIDE 1 — Hook (Image + Title)
+     ════════════════════════════════════════ -->
+<div class="slide" id="slide-1">
+  <div class="safe-zone">
+    <div style="display:flex; flex-direction:column; gap:24px; flex:1; justify-content:center;">
+
+      <!-- Model badge -->
+      <div class="showcase-model-badge">Midjourney v6</div>
+
+      <!-- Image frame -->
+      <div class="showcase-frame" style="flex:1; max-height:780px; display:flex; align-items:center; justify-content:center;">
+        <div style="width:100%; height:100%; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #533483 100%); display:flex; align-items:center; justify-content:center;">
+          <span style="font-family:var(--font-headline); font-size:64px; font-weight:700; color:rgba(255,255,255,0.15);">Your Image Here</span>
+        </div>
+      </div>
+
+      <!-- Prompt excerpt -->
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <p class="type-caption" style="color:var(--text-quaternary);">PROMPT</p>
+        <p style="font-family:var(--font-code); font-size:22px; color:var(--text-tertiary); line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">
+          a serene Japanese garden at dawn, mist rolling over koi pond, cherry blossoms falling, cinematic lighting --ar 4:5 --v 6 --style raw
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="slide-footer">
+    <span class="slide-handle">@yourhandle</span>
+    <div class="progress-dots">
+      <div class="progress-dot active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SLIDE 2 — Prompt Detail
+     ════════════════════════════════════════ -->
+<div class="slide" id="slide-2">
+  <div class="safe-zone">
+    <div style="display:flex; flex-direction:column; gap:32px; flex:1;">
+
+      <!-- Header -->
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div class="showcase-model-badge">Midjourney v6</div>
+        <h2 class="type-h1 gradient-text">The Prompt</h2>
+      </div>
+
+      <!-- Small image reference -->
+      <div class="showcase-frame showcase-frame-sm" style="height:320px; display:flex; align-items:center; justify-content:center;">
+        <div style="width:100%; height:100%; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #533483 100%); display:flex; align-items:center; justify-content:center;">
+          <span style="font-family:var(--font-headline); font-size:36px; font-weight:600; color:rgba(255,255,255,0.12);">Preview</span>
+        </div>
+      </div>
+
+      <!-- Full prompt -->
+      <div class="showcase-prompt" style="flex:1;">
+        <span class="prompt-subject">a serene Japanese garden at dawn</span>, <span class="prompt-style">mist rolling over koi pond, cherry blossoms falling, cinematic lighting, volumetric fog, golden hour rays filtering through maple trees</span>, <span class="prompt-param">hyper-detailed, 8k resolution</span>
+      </div>
+
+      <!-- Parameter tags -->
+      <div class="showcase-params">
+        <div class="showcase-param-tag"><span class="param-key">--ar</span> 4:5</div>
+        <div class="showcase-param-tag"><span class="param-key">--v</span> 6</div>
+        <div class="showcase-param-tag"><span class="param-key">--style</span> raw</div>
+        <div class="showcase-param-tag"><span class="param-key">--q</span> 2</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="slide-footer">
+    <span class="slide-handle">@yourhandle</span>
+    <div class="progress-dots">
+      <div class="progress-dot past"></div>
+      <div class="progress-dot active"></div>
+      <div class="progress-dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SLIDE 3 — CTA
+     ════════════════════════════════════════ -->
+<div class="slide" id="slide-3">
+  <div class="safe-zone flex-col" style="justify-content:center; align-items:center; text-align:center; gap:48px;">
+
+    <!-- Accent line -->
+    <div class="accent-line" style="width:64px;"></div>
+
+    <!-- CTA text -->
+    <div style="display:flex; flex-direction:column; gap:24px; align-items:center;">
+      <h2 class="type-h1 gradient-text">Save this prompt</h2>
+      <p class="type-body" style="max-width:700px;">Follow for daily AI art prompts, techniques, and creative workflows.</p>
+    </div>
+
+    <!-- Action chip -->
+    <div class="accent-chip accent-chip-lg">
+      <span style="font-size:20px;">&#9733;</span>
+      FOLLOW FOR MORE
+    </div>
+
+    <!-- Handle -->
+    <p style="font-family:var(--font-code); font-size:28px; font-weight:500; color:var(--accent-bright); letter-spacing:1px; margin-top:24px;">@yourhandle</p>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="slide-footer">
+    <span class="slide-handle">@yourhandle</span>
+    <div class="progress-dots">
+      <div class="progress-dot past"></div>
+      <div class="progress-dot past"></div>
+      <div class="progress-dot active"></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
