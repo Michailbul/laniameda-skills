@@ -1,0 +1,4 @@
+interface:
+  display_name: "Desi Webdesign Practice Extraction"
+  short_description: "Extract reusable web-design practices from references"
+  default_prompt: "Use $desi-webdesign-practicies-extraction to extract reusable web-design practices from a reference repo, component, code block, screenshot, or URL."

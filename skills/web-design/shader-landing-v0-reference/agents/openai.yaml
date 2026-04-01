@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shader Landing v0 Reference"
+  short_description: "Recreate cinematic shader landing pages"
+  default_prompt: "Use $shader-landing-v0-reference to reproduce the v0 shaders landing page technique from https://v0.app/templates/shaders-landing-page-R3n0gnvYFbO."

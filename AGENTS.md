@@ -52,6 +52,18 @@ Installed agents: Lani, Meda, Crea (symlinked from `/root/.agents/skills/laniame
 
 ## Changelog
 
+### 2026-03-31 — desi-webdesign-practicies-extraction
+**Change:** Added to web-design/  
+**Agents:** all  
+**Action:** Install or sync this skill into relevant workspaces.  
+**Notes:** Extraction workflow for turning repos, components, code blocks, screenshots, and URLs into reusable reconstruction briefs. Always stores the original reference URL when available.
+
+### 2026-03-31 — shader-landing-v0-reference
+**Change:** Added to web-design/  
+**Agents:** all  
+**Action:** Install or sync this skill into relevant workspaces.  
+**Notes:** Canonical source reference URL is `https://v0.app/templates/shaders-landing-page-R3n0gnvYFbO`. Use this when reproducing the specific web-design technique.
+
 ### 2026-03-25 — crea-cinematic-prompts, parallel-deep-research, parallel-web-search, social-media-carousels
 **Change:** Added to repo (were installed in workspaces but missing from canonical source)  
 **Agents:** Already installed — no action needed  

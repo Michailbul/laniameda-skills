@@ -55,6 +55,8 @@ Design, visual output, and branded content production.
 | `carousel-designer` | Generate branded LinkedIn carousel slides (HTML → PDF/PNG) |
 | `carousel-orchestrator` | End-to-end carousel pipeline: brief → Codex → review → deliver |
 | `social-media-carousels` | Design and produce high-engagement social media carousel slides as rendered HTML images. No external dependencies. |
+| `shader-landing-v0-reference` | Recreate the v0 shaders landing-page technique: fixed shader atmosphere, horizontal chapters, glass UI, custom cursor, magnetic CTA, reveal choreography. |
+| `desi-webdesign-practicies-extraction` | Extract reusable design, motion, layout, and frontend implementation practices from a reference repo, component, code block, screenshot, or URL. |
 
 ### marketing/
 Content intelligence, digestion, creation, and standards.
