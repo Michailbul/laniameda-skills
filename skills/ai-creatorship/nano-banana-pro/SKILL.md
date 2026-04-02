@@ -111,6 +111,25 @@ Use templates when the user is vague or when edits must be precise.
 - Editing template (preserve everything else):
   - “Change ONLY: <single change>. Keep identical: subject, composition/crop, pose, lighting, color palette, background, text, and overall style. Do not add new objects. If text exists, keep it unchanged.”
 
+## Motion-Ready Start Frames
+
+Use this when the still image is meant to become the starting frame for an animated AI video shot.
+
+### Rule
+Treat the frame like a keyframe pulled from motion, not like a neutral photo.
+
+### What to emphasize
+- implied movement already underway
+- active posture and directional energy
+- asymmetry, momentum, and continuation-ready gesture
+- hair/fabric/environmental motion where appropriate
+
+### Helpful motion language
+`kinetic`, `dynamic`, `mid-motion`, `caught in movement`, `in-action`, `directional energy`, `wind-swept`, `hair in motion`, `fabric in motion`
+
+### Avoid
+Static portrait energy when the next step is animation.
+
 ## Advanced Edit Patterns
 
 Use these when the job is tighter than a generic edit.
