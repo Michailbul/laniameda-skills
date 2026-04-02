@@ -1,11 +1,11 @@
 ---
 name: nano-banana-pro
-description: Generate/edit images with Nano Banana Pro (Gemini 3 Pro Image). Use for image create/modify requests incl. edits. Supports text-to-image + image-to-image; 1K/2K/4K; use --input-image.
+description: Generate/edit images with Nano Banana Pro (Gemini 3 Pro Image). Use for image create/modify requests incl. edits, style transfer, color-grade transfer, locked-variable edits, and subject replacement. Supports text-to-image + image-to-image; 1K/2K/4K; use --input-image.
 ---
 
 # Nano Banana Pro Image Generation & Editing
 
-Generate new images or edit existing ones using Google's Nano Banana Pro API (Gemini 3 Pro Image).
+Generate new images or edit existing ones using Google's Nano Banana Pro API (Gemini 3 Pro Image), including style transfer, color-grade transfer, locked-variable edits, and subject replacement.
 
 ## Usage
 
@@ -110,6 +110,33 @@ Use templates when the user is vague or when edits must be precise.
 
 - Editing template (preserve everything else):
   - “Change ONLY: <single change>. Keep identical: subject, composition/crop, pose, lighting, color palette, background, text, and overall style. Do not add new objects. If text exists, keep it unchanged.”
+
+## Advanced Edit Patterns
+
+Use these when the job is tighter than a generic edit.
+
+### Locked-Variables Edit Pattern
+Use this when only one element should change and everything else must stay fixed.
+
+```text
+Change ONLY: [single variable].
+Keep locked: subject identity, pose, framing/crop, camera angle/lens feel, lighting direction, color grade, background, wardrobe, and overall style.
+Do not change facial structure, expression, proportions, or any unmentioned element.
+```
+
+### Color-Grade Transfer Pattern
+Use this when the target shot should keep its composition but inherit the look of a reference image.
+
+```text
+Transfer the exact color grade and tonal treatment from the reference style image onto the target image. Keep the target image's composition, framing, focus, lighting direction, pose, depth of field, and camera perspective exactly the same. Do not alter subject position or lens behavior. Apply only the tonal palette, contrast behavior, highlight rolloff, shadow density, and overall cinematic color treatment from the style reference.
+```
+
+### Subject Replacement Pattern
+Use this when the composition/style should stay the same but the main person/object must be swapped.
+
+```text
+Replace the original subject with the person from the reference images, seamlessly integrated into the exact same pose, body positioning, framing, camera angle, and environment. Preserve natural biomechanics, perspective, scale, and shadow consistency. Match the original lighting conditions exactly. Maintain realistic skin texture, visible pores, fine facial detail, and natural tonal variation. No smoothing, no distortion, no artificial blending artifacts.
+```
 
 ## Output
 
