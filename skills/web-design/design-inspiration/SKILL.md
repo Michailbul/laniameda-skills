@@ -153,7 +153,7 @@ After a successful ingest, confirm with:
 
 If the ingest fails, show the error and suggest checking `CONVEX_URL` env var or verifying the skill is installed:
 ```bash
-bunx skills add https://github.com/Michailbul/laniameda-gallery/tree/main/skills/laniameda-gallery-ingest -g -a openclaw
+bunx skills add https://github.com/laniamedaHQ/laniameda-gallery/tree/main/skills/laniameda-gallery-ingest -g -a openclaw
 ```
 
 ### Example payloads
