@@ -149,6 +149,67 @@ Every carousel maps to four functional zones. No exceptions.
 
 ---
 
+## Phase 5: Deliver
+
+### Option A — Telegram delivery (default)
+```bash
+# Send PDF
+message(send, filePath: $PROJECT/dist/carousel.pdf)
+
+# Send cover preview
+message(send, filePath: $PROJECT/dist/slides/01.png,
+        caption: "Carousel ready. N slides. Reply with any tweaks.")
+```
+
+### Option B — Schedule to LinkedIn via Publora
+
+If Michael asks to schedule or post, use the Publora REST API.
+
+**Prerequisite:** Publora API key must be in env as `PUBLORA_API_KEY`. Account must be on Pro plan ($2.99/mo/account).
+
+**1. List connected accounts (find the LinkedIn platform ID):**
+```bash
+curl -s https://api.publora.com/api/v1/platform-connections \
+  -H "x-publora-key: $PUBLORA_API_KEY" | jq '.connections'
+# Returns: [{platformId: "linkedin-ABC123", username: "...", displayName: "..."}]
+```
+
+**2. Schedule the carousel:**
+
+> Publora accepts LinkedIn carousels as a PDF document upload. Use the presigned upload URL flow.
+
+```bash
+# Step 1: get presigned S3 upload URL
+curl -s -X POST https://api.publora.com/api/v1/get-upload-url \
+  -H "Content-Type: application/json" \
+  -H "x-publora-key: $PUBLORA_API_KEY" \
+  -d '{"filename": "carousel.pdf", "contentType": "application/pdf"}'
+# Returns: { uploadUrl, fileKey }
+
+# Step 2: upload PDF to S3
+curl -s -X PUT "$UPLOAD_URL" \
+  -H "Content-Type: application/pdf" \
+  --data-binary @$PROJECT/dist/carousel.pdf
+
+# Step 3: create post with fileKey
+curl -s -X POST https://api.publora.com/api/v1/create-post \
+  -H "Content-Type: application/json" \
+  -H "x-publora-key: $PUBLORA_API_KEY" \
+  -d "{
+    \"content\": \"$POST_CAPTION\",
+    \"platforms\": [\"$LINKEDIN_PLATFORM_ID\"],
+    \"scheduledTime\": \"$ISO_DATETIME\",
+    \"mediaKey\": \"$FILE_KEY\"
+  }"
+```
+
+**When to use Publora vs. manual delivery:**
+- Michael says "schedule this for tomorrow" or "post to LinkedIn" → use Publora
+- Michael wants to review first → deliver to Telegram, wait for approval
+- No Publora key → deliver to Telegram only, note that Publora integration is available
+
+---
+
 ## Slide Map (default 7-slide LinkedIn)
 
 | # | Type | Components to use |
