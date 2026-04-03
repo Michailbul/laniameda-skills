@@ -132,6 +132,23 @@ Pure text, maximum negative space, dramatic typography.
 
 ---
 
+## Carousel Anatomy (every carousel follows this)
+
+Every carousel maps to four functional zones. No exceptions.
+
+| Position | Role | Job |
+|----------|------|-----|
+| Slide 1 | **THE HOOK** | Stop the scroll. Bold, visual, provocative. Biggest text. |
+| Slide 2 | **THE TRANSITION** | What will the user gain / what will the user avoid / what makes you qualified |
+| Slides 3–N-1 | **THE TEASE** | Reveal info bit by bit. Examples, statistics, captivating visuals. Keep swiping. |
+| Last slide | **THE ACTION** | Make the next step obvious. One clear CTA. |
+
+**Typography minimums at carousel scale (1080x1350):**
+- Headlines: **50pt minimum** (55pt+ preferred)
+- Body copy: **14pt minimum** — smaller sizes cause drop-off
+
+---
+
 ## Slide Map (default 7-slide LinkedIn)
 
 | # | Type | Components to use |
