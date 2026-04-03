@@ -18,11 +18,11 @@ For each of the 7 PNGs, verify:
 - [ ] Visual element (metric/equation/list/grid) is distinct from body text
 
 ### Brand
-- [ ] Gold (#BA943B) used only for kicker backgrounds
-- [ ] Purple (#8566AF) used for badges/markers — not dominant
-- [ ] Red-orange (#EA3F2C) used on ≤1 element per slide
-- [ ] White card backgrounds inside slides (not raw slide background)
-- [ ] Near-black (#09090B) for all structural text
+- [ ] Active brand-system palette respected for this carousel context
+- [ ] No purple-adjacent or blue-grey backgrounds if working in Laniameda brand mode
+- [ ] Coral / accent used on ≤1 emphasis element per slide
+- [ ] Light backgrounds use dark text in the prompt/content area
+- [ ] Bottom-of-image labels/chrome remain light over image gradients
 
 ### Content
 - [ ] Slide 1: cover — big headline, no body text walls
@@ -38,6 +38,8 @@ For each of the 7 PNGs, verify:
 | Too many ideas on one slide | "slide_N: split into 2 slides — currently has 3 unrelated points" |
 | Accent overused | "slide_N: accent color on 3 elements — keep to 1 maximum" |
 | Placeholder text | "slide_N: remove placeholder text '[insert stat]' — use real content from brief" |
-| No CTA keyword | "slide_7.closing: add comment keyword e.g. 'Comment THROUGHPUT and I'll send it'" |
-| Metric card missing shadow | "slide_N.metric-card: missing box-shadow — add shadow-[16px_16px_0_0_#8566AF]" |
+| No CTA keyword | "slide_7.closing: preserve the exact CTA offer from the brief — don't genericize it" |
+| Metric card missing shadow | "slide_N.metric-card: missing box-shadow — add the intended depth treatment" |
 | Grid not visible | "global: grid overlay too faint or missing — ensure ::before opacity ~0.07" |
+| Comparison slide is half-width split | "slide_N: comparison outputs are cramped — give each compared output its own full-width slide" |
+| Hero text unreadable over image | "slide_1: increase contrast with gradient + text-shadow, not an opaque container" |

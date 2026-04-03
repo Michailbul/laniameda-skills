@@ -12,41 +12,55 @@ Execution options:
 
 If the cover slide looks like 50 other LinkedIn posts → start over.
 
+Additional validated rule (2026-04-03):
+- Slide 1 must not only be visually strong — the hook copy must be readable in-feed. If the eyebrow or headline is too small to parse at thumbnail size, the slide fails even if the image is beautiful.
+
 ---
 
 ## Fonts (v2)
+Use the active brand-system typography for the current brand context. Do not hardcode a single trio across all carousel work.
+
+When working in the original LinkedIn brutalist mode, the defaults remain:
 ```
 Display:  Bebas Neue  (Google Fonts CDN)
 Body:     Space Grotesk (Google Fonts CDN)
 Mono:     JetBrains Mono (Google Fonts CDN)
 ```
-**NEVER use:** Arial, Inter, Roboto, Helvetica Neue as primary display font.
-Arial Black is acceptable as a fallback only.
 
-Google Fonts link tag (required in every HTML):
-```html
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-```
+When working in Laniameda brand mode, follow the typography defined in the active brand guidelines (for example: Darker Grotesque / Inter / JetBrains Mono, plus approved alternates).
+
+What matters more than the specific font names:
+- strong scale contrast
+- readable hook at thumbnail size
+- clean hierarchy (eyebrow -> hero -> support)
+- text contrast that survives complex image backgrounds
+
+Google Fonts link tags should match the chosen type system.
+Never use generic fallback-looking display typography as the intended design.
 
 ---
 
 ## Typography scale
-| Role              | Font      | Size  | Weight |
-|-------------------|-----------|-------|--------|
-| Bleed headline    | display   | 220px | —      |
-| Hero headline     | display   | 180px | —      |
-| Section headline  | display   | 120px | —      |
-| Metric value      | display   | 112px | —      |
-| Equation number   | display   | 88px  | —      |
-| Stack card title  | display   | 58px  | —      |
-| Body/subtitle     | body      | 38px  | 600    |
-| Checklist label   | body      | 36px  | 700    |
-| Checklist support | body      | 30px  | 400    |
-| Stack card body   | body      | 28px  | 400    |
-| Kicker / badge    | mono      | 20-22px | 700  |
-| Slide counter     | mono      | 18px  | 700    |
-| Table header      | mono      | 22px  | 700    |
-| Table row         | body      | 30px  | 600    |
+Use the brand-system fonts for the current context, but preserve these hierarchy ratios and lessons:
+
+| Role | Typical size range | Why |
+|---|---:|---|
+| Hero headline | 72–220px | Must dominate. If it doesn't instantly anchor the slide, it is too small. |
+| Section / slide headline | 44–120px | Should clearly outrank every support element. |
+| Eyebrow / kicker | 14–36px | This was a repeated failure point: too small = invisible. |
+| Body / subtitle | 18–38px | Must stay readable on mobile. |
+| Mono labels / chrome | 12–22px | Small but legible; never ghosted below useful contrast. |
+
+### Repeated typography failures (validated)
+| Failure | Why it was bad | Fix |
+|---|---|---|
+| Eyebrow at 12–14px over busy image | Lost immediately; hook context vanished | Increase size and/or weight; minimum 14px mono or ~28px display for image-led covers |
+| Support text at 0.22–0.38 opacity | Felt elegant in theory, unreadable in practice | Raise to 0.55+ when over imagery; add text-shadow |
+| Hero text top-anchored by padding | Read as layout drift, not intention | Center the hook block when the image is the hero |
+| Bottom labels adapting to slide bg | Wrong mental model — they sit over the dark image fade | Keep image-layer labels light regardless of slide bg |
+| Comparison badge / "VS" misaligned | Breaks polish instantly | Align with flex; if it still looks awkward, remove it |
+
+Rule: pick fonts from the brand guidelines, but solve for size, hierarchy, position, and contrast first.
 
 ---
 
@@ -70,15 +84,27 @@ Google Fonts link tag (required in every HTML):
 ---
 
 ## Color usage rules
-| Color          | Hex       | Allowed uses                          | Never use for              |
-|----------------|-----------|---------------------------------------|----------------------------|
-| brand (text)   | #09090B   | All body text, borders, structure     | Backgrounds (except terminal) |
-| secondary gold | #BA943B   | Kicker backgrounds only               | Headlines, borders         |
-| primary purple | #8566AF   | Shadow-offsets, badges, eq operators  | Dominant fills             |
-| accent red     | #EA3F2C   | CTA text, equation answer, 1 emphasis | More than 1 element/slide  |
-| white          | #FFFFFF   | Slide bg, card bg                     | Text on light bg           |
+Always follow the active brand system first.
 
-Accent (`#EA3F2C`) on ≤1 element per slide — no exceptions.
+Validated anti-patterns for carousel backgrounds:
+- purple-adjacent backgrounds that read off-brand
+- blue-grey backgrounds that flatten warmth
+- pure black / pure white instead of warm near-black / warm light neutrals
+
+For Laniameda-branded carousels, the validated carousel background set is:
+- Obsidian `#0A0805`
+- Carbon `#191919`
+- Graphite `#3A3A3A`
+- Linen `#FFF4EA`
+- Amber `#E8A838`
+
+Validated rejects:
+- Charcoal Violet `#3D2E42`
+- Slate Blue `#4A5E7A`
+- pure black `#000000`
+- pure white `#FFFFFF`
+
+Accent on ≤1 element per slide remains the rule.
 
 ---
 
@@ -104,6 +130,12 @@ Accent (`#EA3F2C`) on ≤1 element per slide — no exceptions.
 ---
 
 ## Quality checklist (run after every render)
+### Slide 1 / Hook
+- [ ] Headline reads at thumbnail size
+- [ ] Eyebrow is visible, not decorative dust
+- [ ] Hook block feels centered/intentionally placed when image-led
+- [ ] No opaque text container over the hero image unless explicitly part of the brief
+
 ### Layout
 - [ ] No text clipping at right/bottom edges
 - [ ] Slide counter present bottom-right every slide

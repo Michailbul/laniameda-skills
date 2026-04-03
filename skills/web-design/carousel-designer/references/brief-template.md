@@ -24,6 +24,12 @@ Tone: {{brutalist-tech | warm-professional | bold-statement}}
 ## CTA
 Keyword: {{COMMENT_KEYWORD e.g. "THROUGHPUT", "SYSTEM", "FRAMEWORK"}}
 What they get: {{what you'll send them}}
+Exact CTA copy (optional but preferred): {{verbatim CTA from brief — preserve this if provided}}
+
+## Visual constraints (optional)
+Brand mode: {{active brand system / custom}}
+Comparison format: {{full-width-per-item / side-by-side}}
+Do-not-use colors: {{list any rejected colors}}
 
 ## Output
 Save to: {{PROJECT_PATH e.g. ~/work/carousels/YYYY-MM-DD-topic/}}

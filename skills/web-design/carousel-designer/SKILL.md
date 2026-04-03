@@ -9,7 +9,8 @@ description: >
 
   Supports Instagram, LinkedIn, Twitter/X, and Stories. Supports three modes: SHOWCASE
   (AI art / prompt shares), EDUCATE (tutorials, how-tos, listicles), and THINK (thought
-  leadership / raw ideas).
+  leadership / raw ideas). Also use for comparison carousels (tool-vs-tool, before-vs-after,
+  model-vs-model) where each compared output should get its own full-width slide rather than a cramped split layout.
 ---
 
 # Carousel Designer
@@ -37,11 +38,13 @@ Before designing anything, extract from the user's message:
 | **Topic** | (required) |
 | **Key points** | Extract or infer from topic |
 | **CTA** | "Save + follow" |
-| **Tone** | brutalist-tech |
+| **Tone** | brand-system-aligned |
 | **Platform** | Instagram + LinkedIn (1080x1350) |
 | **Mode** | EDUCATE |
 | **Slide count** | 7 (min 5, max 10) |
 | **Carousel type** | Educational |
+| **Brand system** | Use the active brand guidelines when available |
+| **Comparison format** | If comparing outputs, default to one output per slide (full-width), not side-by-side unless the user explicitly asks for a split |
 
 If topic is unclear, ask one question only: *"What's the main idea you want to get across?"*
 
@@ -187,6 +190,22 @@ Slide 6: Result proof
 Slide 7: Offer to help / CTA
 ```
 
+### Comparison / Model Battle
+```
+Slide 1: Hook — what is being compared and why it matters
+Slide 2: Comparison item 1 — output A (full-width)
+Slide 3: Comparison item 1 — output B (full-width)
+Slide 4: Comparison item 2 — output A
+Slide 5: Comparison item 2 — output B
+...
+Final slide: Exact value-exchange CTA
+```
+Rules:
+- one compared output per slide by default
+- full-width image beats half-width split in almost every Instagram case
+- prompt/context box at top, image as hero below
+- use side-by-side only when the brief explicitly prioritizes simultaneous visual comparison over image quality
+
 ### Tools / Listicle
 ```
 Slide 1: Number hook ("7 tools that changed how I create")
@@ -234,15 +253,19 @@ The most important slide. If this fails, nobody swipes.
 
 | Mood | Background | Accent | Body text |
 |------|-----------|--------|-----------|
-| Dark premium | `#0f0f0f` | `#c8ff57` (lime) | `#aaa` |
-| Dark electric | `#0a0a0a` | `#7c6ef5` (purple) | `#999` |
-| Dark warm | `#111` | `#ff6b35` (orange) | `#bbb` |
-| Dark editorial | `#0d0d0d` | `#e8d5b7` (cream) | `#888` |
-| Light editorial | `#f5f3f0` | `#1a1a1a` | `#555` |
-| Dark Tech (default for modes) | `#08080e` | `#6366f1` (indigo) | `rgba(255,255,255,0.60)` |
-| Brutalist (default for LinkedIn) | `#ffffff` | `#EA3F2C` | `#09090B` |
+| Obsidian editorial | `#0A0805` | `#F26157` (coral) | `rgba(240,235,232,0.60+)` |
+| Carbon system | `#191919` | `#F26157` / `#79B791` | `rgba(240,235,232,0.60+)` |
+| Graphite utility | `#3A3A3A` | `#F26157` | `rgba(240,235,232,0.60+)` |
+| Linen light | `#FFF4EA` | `#F26157` | `#1A1008` |
+| Amber signal | `#E8A838` | `#1A1008` / `#F26157` | `#1A1008` |
 
-Default: **Dark Tech** for SHOWCASE/EDUCATE/THINK modes. **Brutalist** for LinkedIn-specific unless overridden.
+Validated rejects for carousel backgrounds:
+- `#3D2E42` / purple-adjacent Charcoal Violet
+- `#4A5E7A` / blue-grey Slate Blue
+- pure black `#000000`
+- pure white `#FFFFFF`
+
+Default to the brand-system palette above unless the user explicitly asks for a different visual language.
 
 ---
 
@@ -322,6 +345,9 @@ For **OpenClaw architecture / agent infrastructure** topics, technical framing i
 - Max 30-40 words per content slide
 - Accent color on <=1 element per slide
 - No placeholder text -- real content from brief only
+- If the slide is image-led, do not put opaque containers/cards on top of the image; solve contrast with gradients and text shadows first
+- For comparison carousels, default to one output per slide; do not crush images into side-by-side half-width frames unless explicitly requested
+- CTA copy should preserve the exact value exchange from the brief; do not rewrite it into a generic "save/follow" hook if the user supplied a concrete offer
 - Print `RENDER_COMPLETE` only after PDF + all PNGs verified to exist
 
 ---
