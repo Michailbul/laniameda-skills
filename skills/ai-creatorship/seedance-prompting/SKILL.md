@@ -38,13 +38,15 @@ Your priorities, in order:
 
 These are the non-negotiables.
 
-- **Always start with identity lock:** `same character throughout all shots`
-- **Prompt order:** Subject → Action → Camera → Style → Constraints → Audio
+- **Default prompt order:** Subject → Action → Camera → Style → Constraints → Audio
+- **Always lock continuity when needed:** `same character throughout all shots`, `same car throughout all shots`, `same dog throughout all shots`, or `same product throughout all shots`
+- **Use the identity lock only when continuity matters** — do not force `same character` on campaign montages, multi-product ads, or deliberately different subjects
 - **Use timecodes for multi-shot:** `[0s] [3s] [6s]`
 - **Max 3 shots per prompt** — more causes drift
 - **Ideal prompt length:** 120–280 words
-- **Action starts at second zero** — never open with stillness
-- **If no timecodes are used, treat it as one static shot only**
+- **Action starts at second zero** — never open with stillness unless the intended motion is environmental or micro-movement
+- **For simple one-shot clips, a compact non-timecoded prompt is valid** — do not force multi-shot structure when one clear shot is enough
+- **Use one main action verb per shot** — avoid stacking multiple unrelated actions into the same beat
 
 ---
 
@@ -66,7 +68,7 @@ Do not bury the actual prompt under explanation.
 Use this default skeleton when writing from scratch:
 
 ```text
-same character throughout all shots, same character consistent appearance every shot.
+same [subject] throughout all shots, same [subject] consistent appearance every shot.
 [0s] [subject + action already in motion]. [camera angle / movement]. [environment details]. [style / color system].
 [3s] [escalation beat or transition]. [camera change if needed]. [physics explicitly named].
 [6s] [final visual beat / impact / reveal / transition out]. [audio ending].
@@ -74,6 +76,19 @@ Global: [aspect ratio], [lens / anamorphic note], [grain], [physics rules], [con
 ```
 
 For single-shot prompts, remove later timecodes and keep one coherent shot.
+
+### Compact single-shot template
+
+Use this when the user wants one clean clip or fast iteration:
+
+```text
+[Subject]. [Action in progress]. [Camera]. [Style]. [Constraints]. [Audio if useful].
+```
+
+Example:
+```text
+A red sports car races through a dusk mountain road. Low front three-quarter tracking shot with subtle handheld vibration and heavy directional motion blur. Premium automotive commercial realism, blue dusk sky, pink roadside flowers, anamorphic 2.39:1, fine grain. Realistic tire grip, suspension compression, petal turbulence in the slipstream. Deep engine note and rushing wind.
+```
 
 ---
 
@@ -91,12 +106,16 @@ Good: “same young woman throughout: black hair, dark structured coat, two swor
 
 ### 2) Action
 Action must already be underway at `[0s]`.
-Do not start with standing still unless the entire point is tension before a micro-movement.
+Do not start with standing still unless the scene is driven by environmental movement, emotional tension, or micro-movement.
 
 Good openings:
 - “she runs through shallow flood water”
 - “he turns sharply as sparks fall behind him”
 - “the train is already entering the station”
+- “the dog stands perfectly still while sheep flow around him”
+- “the car is already cornering at speed as petals lift into the slipstream”
+
+Rule: one clear action verb per shot is stronger than a list of actions.
 
 ### 3) Camera
 Use exact camera language. Prefer one primary move per beat.
@@ -113,7 +132,20 @@ Approved camera terms:
 - `crash zoom`
 - `aerial pull-back`
 
+Additional high-value camera language:
+- `wide`
+- `medium`
+- `close-up`
+- `macro close-up`
+- `telephoto compression`
+- `ultra-wide ground-up lens`
+- `locked-off`
+- `gimbal smooth`
+- `slight handheld sway`
+- `low front three-quarter tracking shot`
+
 If the prompt is already action-heavy, simplify camera movement. Seedance breaks when everything is moving at once.
+Rule: shot size + movement + angle is usually enough. Example: `close-up slow dolly-in from low angle with telephoto compression`.
 
 ### 4) Style
 Describe style as production direction, not hype words.
@@ -180,8 +212,10 @@ Always name the material behavior if it matters.
 - **Slow motion:** `120fps slow-motion on impact, hard snap back to 24fps realtime`
 - **Hair:** `hair reacts to acceleration vector and wind direction`
 - **Impact:** `skin distorting on impact`, `delayed follow-through motion`
+- **Cars / racing:** `suspension compression`, `tire grip under load`, `road vibration through the chassis`, `side mirror vibration`, `slipstream pulling leaves and petals`, `gravel flicking outward from the tire line`
+- **Environment reaction:** `grass bending in airflow`, `debris dragged in the wake`, `petals spiraling after the car passes`, `branches reacting to pressure wave`
 
-If water, dust, hair, cloth, sparks, or debris are visually important, write the physics explicitly.
+If water, dust, hair, cloth, sparks, debris, petals, or vehicle wake are visually important, write the physics explicitly.
 
 ---
 
@@ -268,7 +302,7 @@ You may also:
 ## Mode 1 — Single-shot
 Use when the user wants one clean clip.
 Structure:
-- same character lock
+- one subject lock only if continuity matters
 - one action beat
 - one camera move
 - one color system
@@ -278,15 +312,24 @@ Structure:
 Use for short story beats.
 Rules:
 - max 3 shots
-- each shot escalates
+- each shot escalates or contrasts intentionally
 - final shot must land on reveal / impact / silence / cut to black
 
 ## Mode 3 — Reference-controlled
 If the user provides reference frames or character references:
-- name what the reference controls
-- lock identity at the top
+- say what the reference controls: subject, wardrobe, composition, mood, or setting
+- lock identity only if the same subject must persist
 - keep camera complexity lower than normal
 - avoid more than 2 shots unless necessary
+- build from what is visible in the reference, not invented off-frame lore
+
+## Mode 4 — Commercial / product montage
+Use for ads, fashion films, automotive inserts, pet campaigns, or cutaway coverage.
+Rules:
+- continuity lock can be `same car`, `same dog`, or `same product`, not only `same character`
+- each shot should feature one sellable detail: silhouette, texture, behavior, material, or hero moment
+- use contrast on purpose: prestige shot, detail shot, playful shot, hero shot
+- if multiple subjects are intentionally different, do not force a false identity lock
 
 ---
 
@@ -294,12 +337,51 @@ If the user provides reference frames or character references:
 
 Watch for these when constructing prompts:
 - Too many shots → character drift
+- Forcing `same character` when the scene is actually a montage → bad continuity logic
 - Action + camera + effects all peaking together → chaos
-- No identity lock → face/wardrobe drift
-- No timecodes → mushy or static sequencing
+- No continuity lock when sameness matters → face/wardrobe/vehicle drift
+- No timecodes in multi-shot prompts → mushy sequencing
+- Overusing timecodes for a simple one-shot clip → unnecessary rigidity
 - Generic style words → weak visual language
-- Missing physics → fake water, dead cloth, weightless impacts
+- Missing physics → fake water, dead cloth, weightless impacts, weak speed
 - Weak ending → clip feels unfinished
+
+## Debugging Seedance Prompts
+
+When a prompt underperforms, debug it like a shot problem, not a magic problem.
+
+### Change one variable at a time
+Do not rewrite everything at once.
+Hold the continuity lock, style, and constraints steady while changing only one variable:
+- subject
+- action
+- camera
+- environment
+- color system
+- ending beat
+
+This makes failures legible.
+
+### Debug order
+1. **Action clarity** — is one readable thing happening from second zero?
+2. **Camera simplicity** — is the camera doing too much while the subject is already moving?
+3. **Continuity logic** — should this actually be `same character`, `same car`, `same dog`, or no lock at all?
+4. **Physics specificity** — are the materials reacting believably?
+5. **Ending beat** — does the clip land on something memorable?
+
+### Fast fixes by failure type
+- **Character drift** → reduce shots, simplify wardrobe, strengthen the continuity lock
+- **Chaotic motion** → remove one camera move or one effects layer
+- **Dead realism** → add environment reaction physics, inertia, or secondary motion
+- **Weak emotion** → replace abstract feeling words with visible behavior
+- **Boring output** → strengthen contrast, silhouette, color system, or final beat
+
+### Reference-material debugging
+If using references:
+- use short clean video references for movement or rhythm
+- use clear front-facing image references for identity
+- prefer evenly lit subject references when consistency matters
+- do not mix too many reference goals into one generation unless the interface clearly supports it
 
 ---
 
@@ -307,8 +389,10 @@ Watch for these when constructing prompts:
 
 ### Template A — Single-shot cinematic
 ```text
-same character throughout all shots, same character consistent appearance every shot. [0s] [camera angle] [subject] [action already in progress] in [environment]. [camera movement]. [color system]. [physics]. Global: [aspect ratio], [lens/style], [grain], [constraints]. Audio: [sound design or silence].
+same [subject] throughout all shots, same [subject] consistent appearance every shot. [0s] [camera angle] [subject] [action already in progress] in [environment]. [camera movement]. [color system]. [physics]. Global: [aspect ratio], [lens/style], [grain], [constraints]. Audio: [sound design or silence].
 ```
+
+If continuity does not matter, remove the lock and use the compact single-shot template instead.
 
 ### Template B — Three-beat sequence
 ```text
@@ -330,6 +414,50 @@ same character throughout all shots, same character consistent appearance every 
 
 ---
 
+## Reference Library
+
+Reference source material for Seedance prompt ideation and retrieval is saved in the studio KB here:
+- `~/work/laniameda/laniameda-hq/content-kb/sources/articles/2026-04-10-seedance-2-prompt-guide/`
+
+Structured prompt library extracted from that source:
+- `docs/seedance/imagine-art-seedance-prompt-library.json`
+- `docs/seedance/imagine-art-seedance-prompt-library-categorized.json`
+
+Use these as:
+- category examples
+- retrieval material
+- prompt pattern mining input
+
+Do not treat the library as doctrine. Treat it as example coverage layered under the stricter rules in this skill.
+
+## Advanced Director Structure Reference
+
+Use this only when the prompt needs a fuller director-style brief, such as:
+- emotional narrative shorts
+- multimodal reference-controlled generations
+- more complex ad films with explicit tone and progression
+
+This is an **advanced optional structure**, not the default.
+
+### Advanced structure
+- **Goal & Tone** — one-line statement of the emotional and production objective
+- **Narrative progression** — beginning, development, climax, or equivalent timeline beats
+- **Cinematography** — shot size, camera movement, angle, lens behavior
+- **Lighting & Color** — light quality, temperature, palette, contrast, saturation
+- **Action Direction** — specific visible actions, written coherently and step-by-step when needed
+- **Sound Design** — ambience, sync beats, dialogue, silence, or sonic ending
+- **Constraints** — continuity, anatomy, stability, transition behavior, or interface-specific requirements
+
+### Multimodal dispatch reference
+If the Seedance surface supports reference syntax such as `@image`, `@video`, or `@audio`, use it deliberately:
+- `@image` → identity, wardrobe, composition, scene layout
+- `@video` → movement style, rhythm, camera behavior, transition feel
+- `@audio` → soundtrack, beat sync, lip-sync reference, ambience reference
+
+Rule: assign each reference one clear job. Do not overload a single generation with too many competing reference instructions.
+
+---
+
 ## Response Style
 
 When the user says things like:
@@ -340,3 +468,8 @@ When the user says things like:
 
 You should respond with the finished prompt first.
 Then give only the minimal notes needed to make it usable.
+
+If the user is exploring or ideating rather than asking for a final prompt:
+- you may answer in looser cinematic language first
+- then convert that direction into strict Seedance structure only when needed
+- if switching modes, say so briefly
