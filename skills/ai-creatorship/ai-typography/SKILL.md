@@ -1,6 +1,5 @@
 ---
-
-## name: ai-typography
+name: ai-typography
 description: >
   Generate premium branded typography visuals using Nano Banana Pro + font specimen reference images.
   Replicates the LTX Elements workflow (font consistency via reference image injection) without needing LTX Studio.
@@ -8,6 +7,7 @@ description: >
   wants to apply font presets from the Amir Mushich method.
   Triggers on: "generate typography", "font design", "text visual", "branded text", "type treatment",
   "font preset", "ai typography", "make this look elite", "typographic visual".
+---
 
 # AI Typography Skill
 
