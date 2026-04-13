@@ -23,14 +23,6 @@ Source: Shlabu's Craft guide — [Midjourney x Nano Banana](https://shlabu.craft
 
 ---
 
-## Why This Combo Works
-
-- **Midjourney** (even at 11 months since last update) is still the strongest tool for cinematic scene-building, character continuity, and composed environments
-- **Nano Banana 2** doesn't rebuild the image — it enhances it: skin texture, fabric detail, color grade depth, micro-contrast
-- MJ gives you the shot. NB2 makes it look real.
-
----
-
 ## The Pipeline
 
 ```
@@ -46,7 +38,6 @@ Write a full cinematic MJ prompt:
 - Color grade (e.g. `warm dusty desert color grading, sandy browns and muted greens`)
 - Aesthetic anchor (e.g. `--ar 16:9 --p owuip2c`)
 
-**MJ style code tip:** Shlabu uses `--p owuip2c` — a personal moodboard code that anchors the visual aesthetic. You can test it directly. Create your own via Midjourney's style tuner.
 
 ### Stage 2: Nano Banana 2 — Enhance Realism
 
@@ -84,15 +75,6 @@ Cinematic desert scene continuing from the same environment as the blonde curly-
 **NB2 Enhancement Prompt:**
 ```
 Ultra-realistic enhancement of the existing desert photograph while preserving the exact composition, pose, camera angle, caravan position, chair position, lighting direction, and background elements. The young woman with warm olive skin and shoulder-length dark brown hair remains seated in the folding desert chair wearing yellow overalls and a black t-shirt, with the weathered beige caravan and awning in the background. Improve skin realism and facial detail: visible pores, subtle freckles, natural skin micro-texture, fine facial hair, realistic lip texture, detailed eyelashes, natural catchlights in the eyes, and slightly imperfect skin variation while avoiding artificial smoothing. Maintain the same warm desert lighting and direction, enhancing subtle highlight roll-off on the cheekbones and nose and preserving soft shadows. Increase image clarity and micro-contrast across fabrics and environment: detailed weave in the overalls, realistic stitching and folds, textured desert ground, sharper caravan paint wear, and defined shrub detail. Keep the original moody analog film aesthetic with controlled grain, cinematic color grading, warm golden tones, deep blue sky, and slightly faded vintage palette. Improve sharpness and dynamic range while retaining the nostalgic atmosphere, natural depth, and photographic authenticity.
-```
-
----
-
-## Example: ATV Scene (Shlabu)
-
-**MJ Prompt:**
-```
-A relaxed desert adventure photograph of a young man reclining on a blue sport ATV quad bike parked on top of rolling sand dunes at sunset, wearing a black-and-white keffiyeh loosely wrapped around his head, reflective riding goggles, a white t-shirt, black track pants with side stripes, and casual sneakers, his legs stretched forward over the ATV seat and arms resting loosely across his body, giving a laid-back confident vibe. Shot from a slightly low rear perspective behind the quad so the large off-road tires dominate the foreground, creating strong depth leading toward the rider and the endless dunes. Captured with a smartphone 26-28mm wide lens in vertical framing, rule of thirds placing the rider slightly above center with sweeping desert landscape stretching into the distance. Warm golden hour lighting with the sun setting on the horizon, casting soft orange and pink tones across the sky, subtle rim light outlining the rider, ATV, and sand ridges, long soft shadows following the dune curves. Fine sand textures and wind-carved ripples clearly visible, atmospheric haze over distant dunes and tiny city lights far on the horizon. Natural fabric folds, realistic tire texture, dust on the quad body, visible sand grains. Calm adventurous mood, cinematic sunset sky with scattered wispy clouds catching warm highlights, ultra-detailed, crisp focus, natural color grading, authentic travel photography look, high-resolution social-media-ready image. --ar 16:9 --p owuip2c
 ```
 
 ---

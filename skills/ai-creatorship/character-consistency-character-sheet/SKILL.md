@@ -55,11 +55,8 @@ This becomes your anchor. All downstream work (new outfits, lighting, aging, vid
 ## Tool Stack
 
 | Tool | Role |
-|------|------|
-| **Midjourney** | Source character aesthetics (optional) |
-| **Google Flow** | Primary workspace for Nano Banana |
 | **Nano Banana Pro/2** | Image generation engine |
-| **ChatGPT** | Metaprompting for scene descriptions |
+
 
 ---
 

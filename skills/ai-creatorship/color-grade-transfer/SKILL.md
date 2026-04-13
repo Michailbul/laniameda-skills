@@ -65,7 +65,7 @@ Use the bundled script. It calls Nano Banana 2 (`gemini-2.0-flash-preview-image-
 
 **Standard run (after colorist analysis):**
 ```bash
-uv run ~/.openclaw/workspace-crea/skills/color-grade-transfer/scripts/color_grade_transfer.py \
+uv run ~/skills/color-grade-transfer/scripts/color_grade_transfer.py \
   --source path/to/source.jpg \
   --reference path/to/reference.jpg \
   --filename YYYY-MM-DD-HH-MM-SS-graded.png \
@@ -75,7 +75,7 @@ uv run ~/.openclaw/workspace-crea/skills/color-grade-transfer/scripts/color_grad
 
 **Example with real colorist extra-prompt:**
 ```bash
-uv run ~/.openclaw/workspace-crea/skills/color-grade-transfer/scripts/color_grade_transfer.py \
+uv run ~/skills/color-grade-transfer/scripts/color_grade_transfer.py \
   --source source.jpg \
   --reference blade-runner-2049-ref.jpg \
   --filename 2026-04-01-22-00-00-graded.png \

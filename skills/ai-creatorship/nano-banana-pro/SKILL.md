@@ -1,6 +1,6 @@
 ---
 name: nano-banana-pro
-description: Generate/edit images with Nano Banana Pro (Gemini 3 Pro Image). Use for image create/modify requests incl. edits, style transfer, color-grade transfer, locked-variable edits, and subject replacement. Supports text-to-image + image-to-image; 1K/2K/4K; use --input-image.
+description: Generate/edit images with Nano Banana Pro/ Nano Banana 2. Use for image create/modify requests incl. edits, style transfer, color-grade transfer, locked-variable edits, and subject replacement. Supports text-to-image + image-to-image; 1K/2K/4K; use --input-image.
 ---
 
 # Nano Banana Pro Image Generation & Editing
@@ -13,12 +13,12 @@ Run the script using absolute path (do NOT cd to skill directory first):
 
 **Generate new image:**
 ```bash
-uv run ~/.codex/skills/nano-banana-pro/scripts/generate_image.py --prompt "your image description" --filename "output-name.png" [--resolution 1K|2K|4K] [--api-key KEY]
+uv run ~/skills/nano-banana-pro/scripts/generate_image.py --prompt "your image description" --filename "output-name.png" [--resolution 1K|2K|4K] [--api-key KEY]
 ```
 
 **Edit existing image:**
 ```bash
-uv run ~/.codex/skills/nano-banana-pro/scripts/generate_image.py --prompt "editing instructions" --filename "output-name.png" --input-image "path/to/input.png" [--resolution 1K|2K|4K] [--api-key KEY]
+uv run ~/skills/nano-banana-pro/scripts/generate_image.py --prompt "editing instructions" --filename "output-name.png" --input-image "path/to/input.png" [--resolution 1K|2K|4K] [--api-key KEY]
 ```
 
 **Important:** Always run from the user's current working directory so images are saved where the user is working, not in the skill directory.
@@ -28,7 +28,7 @@ uv run ~/.codex/skills/nano-banana-pro/scripts/generate_image.py --prompt "editi
 Goal: fast iteration without burning time on 4K until the prompt is correct.
 
 - Draft (1K): quick feedback loop
-  - `uv run ~/.codex/skills/nano-banana-pro/scripts/generate_image.py --prompt "<draft prompt>" --filename "yyyy-mm-dd-hh-mm-ss-draft.png" --resolution 1K`
+  - `uv run ~/skills/nano-banana-pro/scripts/generate_image.py --prompt "<draft prompt>" --filename "yyyy-mm-dd-hh-mm-ss-draft.png" --resolution 1K`
 - Iterate: adjust prompt in small diffs; keep filename new per run
   - If editing: keep the same `--input-image` for every iteration until you’re happy.
 - Final (4K): only when prompt is locked
