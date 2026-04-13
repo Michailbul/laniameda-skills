@@ -22,10 +22,13 @@ WORKSPACE_SKILLS_DIRS="${WORKSPACE_SKILLS_DIRS:-}"
 
 mkdir -p "$AGENTS_DIR" "$CLAUDE_DIR"
 
-IFS=':' read -r -a WORKSPACE_DIR_ARRAY <<< "$WORKSPACE_SKILLS_DIRS"
-for workspace_dir in "${WORKSPACE_DIR_ARRAY[@]}"; do
-  [[ -n "$workspace_dir" ]] && mkdir -p "$workspace_dir"
-done
+WORKSPACE_DIR_ARRAY=()
+if [[ -n "$WORKSPACE_SKILLS_DIRS" ]]; then
+  IFS=':' read -r -a WORKSPACE_DIR_ARRAY <<< "$WORKSPACE_SKILLS_DIRS"
+  for workspace_dir in "${WORKSPACE_DIR_ARRAY[@]}"; do
+    [[ -n "$workspace_dir" ]] && mkdir -p "$workspace_dir"
+  done
+fi
 
 updated=0
 created=0
@@ -65,11 +68,13 @@ sync_skill() {
     echo "  new:     $name"
   fi
 
-  for workspace_dir in "${WORKSPACE_DIR_ARRAY[@]}"; do
-    [[ -z "$workspace_dir" ]] && continue
-    sync_dir "$src" "$workspace_dir" "$name"
-    echo "           ↳ workspace: $workspace_dir/$name"
-  done
+  if [[ ${#WORKSPACE_DIR_ARRAY[@]} -gt 0 ]]; then
+    for workspace_dir in "${WORKSPACE_DIR_ARRAY[@]}"; do
+      [[ -z "$workspace_dir" ]] && continue
+      sync_dir "$src" "$workspace_dir" "$name"
+      echo "           ↳ workspace: $workspace_dir/$name"
+    done
+  fi
 }
 
 echo "Syncing laniameda skills..."
