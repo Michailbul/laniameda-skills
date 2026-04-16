@@ -157,6 +157,36 @@ Use this when the composition/style should stay the same but the main person/obj
 Replace the original subject with the person from the reference images, seamlessly integrated into the exact same pose, body positioning, framing, camera angle, and environment. Preserve natural biomechanics, perspective, scale, and shadow consistency. Match the original lighting conditions exactly. Maintain realistic skin texture, visible pores, fine facial detail, and natural tonal variation. No smoothing, no distortion, no artificial blending artifacts.
 ```
 
+## Upscale / Enhancement Templates
+
+Use these when the user wants to enhance an existing image to cinematic quality without changing its content. Always use with `--input-image`. Resolution should be `4K` for final upscales, `2K` for draft review.
+
+### Portrait / Person Upscale
+
+```text
+Enhance the uploaded image to a flawless, ultra-high-quality cinematic version while preserving the subject with absolute precision. The person's identity, facial anatomy, expression, body pose, clothing, accessories, surroundings, framing, and overall composition must remain completely unchanged. Do not alter, reinterpret, replace, or introduce any new visual elements. Restore and refine micro-level details including precise facial contours, authentic skin texture with naturally visible pores, individually rendered hair strands, sharp and vivid eyes, and clean, well-defined edges throughout the image. Enhance dynamic range, contrast, and dimensionality with balanced, studio-quality cinematic lighting.
+```
+
+### Automotive / Car Upscale
+
+```text
+Enhance the uploaded image to a flawless, ultra-high-quality cinematic version while preserving the vehicle with absolute precision. The car's make, model, body shape, paint color, finish type, livery, badges, wheels, aerodynamic elements, surroundings, framing, and overall composition must remain completely unchanged. Do not alter, reinterpret, replace, or introduce any new visual elements. Restore and refine micro-level details including precise panel contours, authentic paint surface with visible metallic flake or matte grain, individually resolved mesh and spoke geometry in the wheels, sharp and legible badges and emblems, clean brake caliper detail, and well-defined edges throughout the image. Enhance dynamic range, contrast, and dimensionality with balanced, cinematic lighting that preserves the original light direction and color temperature.
+```
+
+### Universal Upscale (any image)
+
+```text
+Enhance the uploaded image to a flawless, ultra-high-quality cinematic version while preserving every subject and element with absolute precision. All subjects, objects, materials, colors, textures, surroundings, framing, and overall composition must remain completely unchanged. Do not alter, reinterpret, replace, or introduce any new visual elements. Restore and refine micro-level details including precise contours, authentic surface textures, individually resolved fine structures, sharp focal elements, and clean, well-defined edges throughout the image. Enhance dynamic range, contrast, and dimensionality with balanced, cinematic lighting that preserves the original light direction and color temperature.
+```
+
+### Choosing the right template
+
+| Image contains | Use |
+|---|---|
+| People, faces, portraits | Portrait / Person |
+| Cars, vehicles, automotive | Automotive / Car |
+| Anything else or mixed subjects | Universal |
+
 ## Output
 
 - Saves PNG to current directory (or specified path if filename includes directory)
