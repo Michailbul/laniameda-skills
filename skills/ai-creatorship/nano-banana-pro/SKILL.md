@@ -1,11 +1,11 @@
 ---
 name: nano-banana-pro
-description: Generate/edit images with Nano Banana Pro/ Nano Banana 2. Use for image create/modify requests incl. edits, style transfer, color-grade transfer, locked-variable edits, and subject replacement. Supports text-to-image + image-to-image; 1K/2K/4K; use --input-image.
+description: Generate/edit images and craft/critique/refine prompts for Nano Banana Pro / Nano Banana 2. Use for image create/modify requests, prompt optimization, structured prompt templates, JSON prompt formats, text-heavy layouts, typography, style transfer, color-grade transfer, locked-variable edits, and subject replacement. Supports text-to-image + image-to-image; 1K/2K/4K; use --input-image.
 ---
 
-# Nano Banana Pro Image Generation & Editing
+# Nano Banana Pro Image Generation, Editing & Prompting
 
-Generate new images or edit existing ones using Google's Nano Banana Pro API (Gemini 3 Pro Image), including style transfer, color-grade transfer, locked-variable edits, and subject replacement.
+Generate new images, edit existing ones, or craft precise prompts for Google's Nano Banana Pro API (Gemini 3 Pro Image), including style transfer, color-grade transfer, locked-variable edits, text-heavy layouts, and subject replacement.
 
 ## Usage
 
@@ -95,11 +95,51 @@ When the user wants to modify an existing image:
 
 ## Prompt Handling
 
-**For generation:** Pass user's image description as-is to `--prompt`. Only rework if clearly insufficient.
+**For simple generation:** Pass the user's image description as-is to `--prompt`. Only rework if clearly insufficient.
 
-**For editing:** Pass editing instructions in `--prompt` (e.g., "add a rainbow in the sky", "make it look like a watercolor painting")
+**For editing:** Pass editing instructions in `--prompt` (e.g., "add a rainbow in the sky", "make it look like a watercolor painting").
+
+**For prompt-writing requests:** Do not run generation unless the user asks for an image. Deliver a ready-to-run prompt as the primary output.
+
+**For complex prompts:** Use labeled sections and explicit rules when the task includes text, counts, layouts, typography, multiple inputs, diagrams, or exact constraints.
 
 Preserve user's creative intent in both cases.
+
+## Prompt Engineering Workflow
+
+Use this when the user asks for a Nano Banana prompt, wants prompt optimization, or the generation requires precise structure.
+
+1. Clarify goal and constraints from the request: subject, medium, layout, text, counts, input images, output format.
+2. Choose the smallest pattern that enforces the constraints.
+3. Draft the prompt with labeled sections and explicit rules.
+4. Add validation anchors for exact counts, placement, readable text, and forbidden changes.
+5. Provide 1-2 variants only if useful or requested.
+
+### Prompt Skeleton
+
+```text
+GOAL: <what to generate>
+INPUTS: <image refs or none>
+LAYOUT: <spatial regions, hierarchy, placement>
+SUBJECTS: <entities, counts, poses>
+TEXT: <exact strings, fonts, placement>
+STYLE: <medium, rendering, aesthetic>
+LIGHTING/CAMERA: <angle, lens, lighting>
+CONSTRAINTS: <must/never rules, exact counts>
+VALIDATION: <"ensure exactly X", "no extra text">
+```
+
+### Prompt Pattern Selection
+
+- Layout-heavy, text-heavy, or multi-panel: use structured layout anchors.
+- Multi-input synthesis or system-level control: use JSON prompt.
+- Cinematic scene with people/props: use scene composition.
+- Character identity transfer: use character pipeline.
+
+### When to Load References
+
+- `references/prompt-patterns.md` — detailed templates, checklists, and pattern selection.
+- `references/prompt-bank.md` — full example prompts and use-case blueprints.
 
 ## Prompt Templates (high hit-rate)
 

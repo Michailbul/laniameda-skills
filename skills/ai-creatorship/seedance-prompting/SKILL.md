@@ -253,28 +253,19 @@ Best practice: finish with the strongest possible final beat instead of overusin
 
 ---
 
-## Color Systems
+## Color & Grade
 
 Write palettes like an art director, not a moodboard caption.
 
-### Reusable color systems
+**Rule: always derive the color grade from the scene's emotional logic and the source lighting.** No preset palettes, no named defaults. Every scene gets the color treatment it deserves — pulled from what the subject feels, where the light comes from, and what the shot is trying to say.
 
-**Dark neon**
-- `deep midnight blue, neon amber reflections, crushed blacks, wet surfaces, anamorphic 2.39:1`
+When writing the color block, name:
+- the dominant light source and its temperature
+- the 1–3 colors allowed in frame (and what is explicitly excluded)
+- contrast behavior (crushed shadows, blown highlights, midtone flatness)
+- any surface behavior that reinforces the grade (wet asphalt reflections, volumetric haze, skin glow, matte absorption)
 
-**Desert amber**
-- `burnt amber, ochre, desaturated warm tones, volumetric dust haze, only two colors: burnt orange and pure black`
-
-**Deep red**
-- `single deep red emergency light, sprinkler rain, no other colors, floor puddle mirror reflections`
-
-**IR monochrome**
-- `infrared black and white, no color at all, white skin glows unnaturally, black absorbs all light`
-
-**Storm grey**
-- `dark overcast sky, steel grey, single lightning as light source, city glow on wet surfaces`
-
-If the user does not specify color, choose one coherent color system instead of vague cinematic language.
+If the user does not specify color, build one coherent system from the scene's own logic instead of pulling from a preset library or using vague cinematic language.
 
 ---
 

@@ -36,9 +36,11 @@ Skills for generating and creating with AI — images, video, prompts, knowledge
 
 | Skill | What it does |
 |---|---|
-| `nano-banana-pro` | Generate/edit images with Nano Banana 2 (Gemini 3 Pro Image) |
+| `nano-banana-pro` | Generate/edit images and craft structured prompts for Nano Banana 2 (Gemini 3 Pro Image) |
 | `image-to-prompt` | Reverse-engineer any image into a structured cinematic prompt |
 | `ai-video-prompting` | Write AI video prompts (Kling, Seedance, Runway) |
+| `seedance-director` | Convert plain scene descriptions into bilingual Seedance 2.0 JSON prompts |
+| `burst-frame-cars` | Generate rapid-fire automotive reference-frame prompts for Seedance/Nano Banana workflows |
 | `frame-vfx-stylizer` | Stylize video frame-by-frame with AI graphic effects |
 | `laniameda-kb` | Save prompts, images, tutorials to the laniameda.gallery vault |
 | `laniameda-x-post-digest` | Digest X/Twitter posts about AI creatorship — extract prompts, workflows, tools. Follows all linked resources (PDFs, videos, threads). Offers skill conversion. |
