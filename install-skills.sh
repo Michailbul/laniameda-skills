@@ -1,10 +1,12 @@
 #!/bin/bash
-# install-skills.sh — Sync laniameda skills to ~/.agents/skills/, ~/.claude/skills/, and optional workspace skill dirs
+# install-skills.sh — Sync laniameda skills to ~/.agents/skills/, ~/.claude/skills/, ~/.codex/skills/, and optional workspace skill dirs
 #
 # Copies all skill folders from this repo (including nested skills/<category>/<skill>/)
 # into ~/.agents/skills/<skill-name>/ and ~/.claude/skills/<skill-name>/ as real
-# directories (no symlinks). Optionally also syncs into one or more workspace skill
-# directories so local agent workspaces stay aligned with the canonical repo.
+# directories. Creates ~/.codex/skills/<skill-name> symlinks pointing to the
+# ~/.agents/skills copies so Codex sees the same canonical install without duplicate
+# directory copies. Optionally also syncs into one or more workspace skill directories
+# so local agent workspaces stay aligned with the canonical repo.
 #
 # Usage:
 #   ./install-skills.sh                          # sync all skills to default targets
@@ -17,10 +19,61 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 AGENTS_DIR="$HOME/.agents/skills"
 CLAUDE_DIR="$HOME/.claude/skills"
+CODEX_DIR="$HOME/.codex/skills"
 TARGET_SKILL="${1:-}"
 WORKSPACE_SKILLS_DIRS="${WORKSPACE_SKILLS_DIRS:-}"
+SKIP_EXTERNAL_SYNC="${SKIP_EXTERNAL_SYNC:-}"
 
-mkdir -p "$AGENTS_DIR" "$CLAUDE_DIR"
+mkdir -p "$AGENTS_DIR" "$CLAUDE_DIR" "$CODEX_DIR"
+
+# External-origin skills. Each entry: "<origin-repo-path>:<origin-skill-subdir>:<local-category>"
+# Before installing, pull the origin repo and rsync the skill into this repo so
+# downstream agents always get the latest version from ground truth.
+EXTERNAL_ORIGINS=(
+  "$HOME/work/laniameda/laniameda.gallery:skills/laniameda-gallery-ingest:ai-creatorship"
+  "$HOME/work/laniameda/laniameda.gallery:skills/laniameda-gallery-query:utility"
+)
+
+sync_external_origins() {
+  [[ -n "$SKIP_EXTERNAL_SYNC" ]] && { echo "Skipping external origin sync (SKIP_EXTERNAL_SYNC set)."; echo ""; return; }
+
+  echo "Refreshing skills from external origins..."
+  local pulled_repos=()
+  for entry in "${EXTERNAL_ORIGINS[@]}"; do
+    IFS=':' read -r repo_path skill_subdir category <<< "$entry"
+    local skill_name
+    skill_name=$(basename "$skill_subdir")
+
+    if [[ ! -d "$repo_path/.git" ]]; then
+      echo "  skipped: $skill_name (origin repo not found at $repo_path)"
+      continue
+    fi
+
+    # Pull each origin repo once even if it hosts multiple skills
+    if [[ ! " ${pulled_repos[*]:-} " =~ " $repo_path " ]]; then
+      if (cd "$repo_path" && git pull --ff-only --quiet 2>/dev/null); then
+        echo "  pulled:  $(basename "$repo_path")"
+      else
+        echo "  warn:    could not fast-forward $(basename "$repo_path") — using current checkout"
+      fi
+      pulled_repos+=("$repo_path")
+    fi
+
+    local src="$repo_path/$skill_subdir"
+    local dst="$SCRIPT_DIR/skills/$category/$skill_name"
+    if [[ ! -d "$src" ]]; then
+      echo "  skipped: $skill_name (origin path missing: $src)"
+      continue
+    fi
+    mkdir -p "$dst"
+    # Preserve the local README.md pointer (it documents the origin relationship)
+    rsync -a --delete --exclude='.DS_Store' --exclude='README.md' "$src/" "$dst/"
+    echo "  synced:  $skill_name ← $(basename "$repo_path")/$skill_subdir"
+  done
+  echo ""
+}
+
+sync_external_origins
 
 WORKSPACE_DIR_ARRAY=()
 if [[ -n "$WORKSPACE_SKILLS_DIRS" ]]; then
@@ -48,11 +101,26 @@ sync_dir() {
   rsync -a --safe-links "$src/" "$dest_root/$name/"
 }
 
+link_codex_skill() {
+  local name="$1"
+  local target="$AGENTS_DIR/$name"
+  local link="$CODEX_DIR/$name"
+
+  if [[ -L "$link" ]]; then
+    rm "$link"
+  elif [[ -e "$link" ]]; then
+    rm -rf "$link"
+  fi
+
+  ln -s "$target" "$link"
+}
+
 sync_skill() {
   local src="$1"
   local name=$(basename "$src")
 
   sync_dir "$src" "$AGENTS_DIR" "$name"
+  link_codex_skill "$name"
 
   if [[ -L "$CLAUDE_DIR/$name" ]]; then
     sync_dir "$src" "$CLAUDE_DIR" "$name"

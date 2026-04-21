@@ -3,8 +3,10 @@ name: seedance-prompting
 description: >
   Write high-performance prompts for Seedance 2.0. Use whenever the user asks for a Seedance prompt,
   multi-shot cinematic video prompt, timecoded AI video scene, or wants better character consistency,
-  camera choreography, stop-motion beats, or physics-aware motion in Seedance. Prefer this skill over
-  generic video prompting when the target model is explicitly Seedance.
+  camera choreography, stop-motion beats, or physics-aware motion in Seedance. Also use when the user
+  asks for AI-generated reels, TikToks, YouTube clips, Instagram videos, or general AI video scene
+  prompts that need cinematic framing, camera movement, lighting, or visual style. Prefer this skill
+  over generic video prompting when the target model is explicitly Seedance.
 metadata:
   laniameda:
     departments: ['Operations', 'Marketing']
@@ -12,7 +14,7 @@ metadata:
     tags: ['seedance', 'ai-video', 'prompting', 'cinematic', 'timecoded-video']
     status: active
     depends_on: []
-    replaces: []
+    replaces: ['seedance-prompts']
   clawdbot:
     emoji: 🎬
 ---
@@ -47,6 +49,9 @@ These are the non-negotiables.
 - **Action starts at second zero** — never open with stillness unless the intended motion is environmental or micro-movement
 - **For simple one-shot clips, a compact non-timecoded prompt is valid** — do not force multi-shot structure when one clear shot is enough
 - **Use one main action verb per shot** — avoid stacking multiple unrelated actions into the same beat
+
+If the user gives a loose AI-video idea, convert it into this six-part base before adding advanced structure:
+`Camera/shot type -> Subject -> Action/motion -> Environment -> Lighting -> Visual style/mood`.
 
 ---
 
@@ -136,12 +141,17 @@ Additional high-value camera language:
 - `wide`
 - `medium`
 - `close-up`
+- `extreme close-up`
 - `macro close-up`
+- `aerial / drone`
 - `telephoto compression`
 - `ultra-wide ground-up lens`
 - `locked-off`
+- `static, no camera movement`
 - `gimbal smooth`
 - `slight handheld sway`
+- `gentle pan left / right`
+- `crane rising slowly`
 - `low front three-quarter tracking shot`
 
 If the prompt is already action-heavy, simplify camera movement. Seedance breaks when everything is moving at once.
@@ -329,6 +339,8 @@ Rules:
 Watch for these when constructing prompts:
 - Too many shots → character drift
 - Forcing `same character` when the scene is actually a montage → bad continuity logic
+- Static output → missing subject action, camera movement, or environmental motion
+- Flat lighting → missing directional source, color temperature, or contrast behavior
 - Action + camera + effects all peaking together → chaos
 - No continuity lock when sameness matters → face/wardrobe/vehicle drift
 - No timecodes in multi-shot prompts → mushy sequencing
@@ -363,6 +375,8 @@ This makes failures legible.
 ### Fast fixes by failure type
 - **Character drift** → reduce shots, simplify wardrobe, strengthen the continuity lock
 - **Chaotic motion** → remove one camera move or one effects layer
+- **Static output** → add one clear subject action, camera move, or environmental motion
+- **Flat lighting** → name the light source, temperature, and shadow behavior
 - **Dead realism** → add environment reaction physics, inertia, or secondary motion
 - **Weak emotion** → replace abstract feeling words with visible behavior
 - **Boring output** → strengthen contrast, silhouette, color system, or final beat
@@ -394,6 +408,18 @@ same character throughout all shots, same character consistent appearance every 
 ```text
 same character throughout all shots, same character consistent appearance every shot. [0s] [action in progress]. [camera]. [color system]. [3s] STOP MOTION 1.0s — complete audio silence — [exact frozen visual] — explosive snap-back to full speed. [6s] [final impact or reveal]. Global: [constraints], [physics], [format].
 ```
+
+### Platform format defaults
+- TikTok / Reels / Shorts: `vertical 9:16`, favor close-ups and readable motion
+- YouTube: `16:9` or `cinematic widescreen`, allow wider environmental framing
+- Instagram square: `1:1`, center important subjects and avoid edge-dependent action
+
+### Model and iteration notes
+- Seedance 2.0: use for hero shots, cinematic quality, and complex scenes
+- Seedance 1.5: use for cheaper concept iteration when available
+- Kling: consider for character motion and performance-heavy clips
+- Veo: consider for detailed environmental scenes
+- Generate 4-5 second clips when exploring; stitch multiple strong clips instead of stretching one weak long generation
 
 ---
 

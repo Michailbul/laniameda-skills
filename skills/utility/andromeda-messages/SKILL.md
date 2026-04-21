@@ -1,12 +1,12 @@
 ---
 name: andromeda-messages
 description: >
-  Add, update, delete, or list nodes in the Andromeda Galaxy app.
+  Add, update, delete, or list regular note and article nodes in the Andromeda Galaxy app.
   Also lock/unlock galaxies programmatically.
 
   Use when Michael asks to add a message/thought/record to any galaxy (Dreams, Life,
-  Soulmate, Family, Antidreams), or to list/edit/delete nodes, unlock a galaxy, or check
-  galaxy status.
+  Soulmate, Family, Antidreams), add an article/markdown note, list/edit/delete nodes,
+  unlock a galaxy, or check galaxy status.
 
   Keywords: add to andromeda, save to galaxy, add to dreams, add to жизнь,
   unlock your life, разблокируй семью, delete node, update node.
@@ -81,7 +81,16 @@ These rules are mandatory. The Andromeda backend is live production data.
 curl -s -X POST "$BASE_URL/api/andromeda" \
   -H "Authorization: Bearer $ADMIN_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"galaxy":"Your Life","title":"Short title","content":"Full message text","nodeType":"STATION"}'
+  -d '{"galaxy":"Your Life","title":"Short title","content":"Full message text","nodeType":"STATION","noteType":"note"}'
+```
+
+For centered markdown articles, set `noteType` to `article`:
+
+```bash
+curl -s -X POST "$BASE_URL/api/andromeda" \
+  -H "Authorization: Bearer $ADMIN_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"galaxy":"Your Life","title":"Article title","content":"# Markdown article\n\nPure markdown text.","nodeType":"STATION","noteType":"article"}'
 ```
 
 ### GET — List nodes in a galaxy
@@ -97,7 +106,7 @@ curl -s "$BASE_URL/api/andromeda?galaxy=Your+Life" \
 curl -s -X PATCH "$BASE_URL/api/andromeda" \
   -H "Authorization: Bearer $ADMIN_TOKEN" \
   -H "Content-Type: application/json" \
-  -d '{"nodeId":"<id>","title":"New title","content":"New content"}'
+  -d '{"nodeId":"<id>","title":"New title","content":"New content","noteType":"article"}'
 ```
 
 ### DELETE — Delete a node
@@ -137,12 +146,22 @@ Set `locked: false` to unlock, `locked: true` to lock.
 - `RELAY` — connecting or transition node
 - `SENSOR` — observation or detail node
 
+## noteType Options
+
+- `note` — regular galaxy node that opens in the side panel
+- `article` — markdown article node that opens in a centered modal
+
+Use `noteType: "article"` whenever Michael asks for an article, long-form note, markdown article, essay, centered reader, or modal-style note. Use `noteType: "note"` or omit it for the existing side-panel behavior.
+
 ---
 
 ## Workflow Examples
 
 `Add to Your Dreams: title "Morning Light", content "..."`
 Use `POST /api/andromeda`, then confirm the canonical galaxy name.
+
+`Add article to Your Life: title "What I learned", content "# What I learned\n\n..."`
+Use `POST /api/andromeda` with `{"noteType":"article"}`. Confirm the canonical galaxy name and that it opens in the centered article modal.
 
 `Unlock Your Life`
 Use `POST /api/andromeda/galaxy` with `{"galaxy":"Your Life","locked":false}`.
@@ -161,5 +180,7 @@ Use `PATCH /api/andromeda` with `{ nodeId, title }`.
 ## Notes
 
 - Changes are live immediately through Convex
+- `nodeType` controls the 3D node shape/category; `noteType` controls the reader UI
+- Article markdown lives in `content`/`missionProfile`; the article marker is stored as `data.noteType`
 - Galaxy lock state lives in the `galaxySettings` table
 - Admin UI route: `/admin/andromeda`

@@ -14,8 +14,12 @@ Use `convex/schema.ts` as source of truth. This file is the quick ingest map for
 
 - `designInspirations`
   - Use for non-prompt design references.
-  - Key ingest fields: `ownerUserId`, `pillar: "designs"`, `title`, `summary`, `sourceUrl`, `sourceDomain`, `inspirationType`, `platform`, `workflowType`, `tagIds`, `folderId`, `ingestKey`, optional links to `assetId` and `promptId`.
+  - Key ingest fields: `ownerUserId`, `pillar: "designs"`, `title`, `summary`, `sourceUrl`, `sourceDomain`, `sourceTitle`, `userNote`, `inspirationType`, `platform`, `workflowType`, `captureKind`, `saveIntent`, `templateKey`, `sourceFingerprint`, `status`, `tagIds`, `folderId`, `ingestKey`, optional links to `assetId` and `promptId`.
   - Idempotency index: `by_owner_ingestKey`.
+
+- `designSaveTemplates`
+  - Owner-scoped default metadata for browser-extension design saves.
+  - Not used by the ingest script today, but part of the shared backend schema.
 
 - `semanticDocuments`
   - Async search index rows generated from assets, prompts, and design inspirations.
@@ -55,8 +59,14 @@ These are maintained by backend mutations; callers usually pass tag names or typ
 
 - `ingest:ingestFromApi` is the canonical external ingest action.
 - Prompt-only ingests must set `allowPromptOnly: true`; mixed prompt+media ingests must not rely on implicit prompt creation alone. This applies across the maintained ingest surfaces, including the legacy agent-ingest path.
-- `ingest:updateFromApi` is the canonical external metadata update action.
+- `ingest:updateFromApi` is the canonical external update action. It supports both metadata updates and media operations.
+  - **Prompt media attachment:** `target: "prompt"` + `file`/`url` creates a new asset linked to the prompt (or replaces media if the derived `assetIngestKey` already exists).
+  - **Asset media replacement:** `target: "asset"` + `file`/`url` replaces the stored file, thumbnail, and file-related fields (kind, contentType, dimensions). Old storage blobs are cleaned up.
+  - Both media operations accept `file` (base64 + fileName + contentType) or `url` (remote fetch). The `assetIngestKey` field overrides the default `${ingestKey}:img` key used when creating assets from prompt updates.
+- The ingest contract now exposes the newer design-inspiration metadata fields for both create and update flows, so browser-extension-style saves can stay lossless.
 - `ingest:deleteFromApi` is the canonical external delete action.
+- Prompt-linked multi-asset variations are normalized into `assetPacks` automatically at the mutation layer.
+- Legacy prompt groups can be backfilled with `assetPacks:consolidateOwnerPromptPacks`.
 - `app/api/ingest/route.ts` maps session-authenticated browser calls to the same backend contract.
 - `app/api/ingest/update/route.ts` and `app/api/ingest/delete/route.ts` expose session-authenticated update/delete routes.
 - Semantic indexing is async after successful ingest; callers do not send embeddings or wait for indexing completion.
