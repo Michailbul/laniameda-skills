@@ -13,6 +13,7 @@ Use this skill to read from `laniameda.gallery`.
 It covers two read surfaces:
 
 - asset-centric reads: browse assets, semantic search, fetch one asset, download media
+- pack reads: fetch a saved asset pack and its member assets from a copied gallery ID
 - designs-pillar reads: browse structured design inspirations and inspect one design entry with its linked preview asset
 
 Counterpart to `laniameda-gallery-ingest` (which writes).
@@ -100,7 +101,39 @@ Fetch one owner-scoped asset with hydrated prompt/tag metadata.
 ```json
 {
   "action": "get",
-  "assetId": "assets:abc123"
+  "assetId": "asset:abc123"
+}
+```
+
+Raw Convex asset IDs are also accepted for `assetId`, but copied gallery IDs use the typed `asset:<id>` form.
+
+### `getPack`
+
+Fetch one owner-scoped asset pack and its hydrated member assets.
+
+```json
+{
+  "action": "getPack",
+  "packId": "pack:abc123"
+}
+```
+
+### `getById`
+
+Resolve a copied gallery ID without first deciding which table to query.
+
+Supported copied ID formats:
+
+- `asset:<id>`
+- `pack:<id>`
+- `design:<id>`
+
+Example:
+
+```json
+{
+  "action": "getById",
+  "id": "pack:abc123"
 }
 ```
 
@@ -111,7 +144,7 @@ Download one owner-scoped asset to local disk.
 ```json
 {
   "action": "download",
-  "assetId": "assets:abc123",
+  "assetId": "asset:abc123",
   "outDir": "/tmp/laniameda-gallery"
 }
 ```
@@ -156,7 +189,7 @@ Fetch one owner-scoped design inspiration and, when present, hydrate its linked 
 ```json
 {
   "action": "getDesign",
-  "designInspirationId": "designInspirations:abc123"
+  "designInspirationId": "design:abc123"
 }
 ```
 
@@ -167,6 +200,12 @@ Fetch one owner-scoped design inspiration and, when present, hydrate its linked 
 1. `search` to find the best asset
 2. `download` to save the asset locally
 3. use `savedPath` and `promptText` in the current task
+
+### Resolve a copied gallery item
+
+1. Use `getById` with the exact copied ID from the gallery UI
+2. If the ID starts with `pack:`, inspect the returned `assets` array and choose the needed member asset
+3. If media bytes are needed, run `download` with the chosen `asset:<id>`
 
 ### Find a saved design reference
 
@@ -187,7 +226,20 @@ Asset actions return compact asset objects with fields like:
 - `thumbUrl`
 - `folderId`
 - `assetRole`
+- `assetPackId`
+- `packSlotIndex`
 - `score` (semantic search only)
+
+Pack actions return:
+
+- `pack.id`
+- `pack.title`
+- `pack.description`
+- `pack.pillar`
+- `pack.modelName`
+- `pack.coverAssetId`
+- `pack.itemCount`
+- `assets` hydrated like asset results
 
 Design actions return compact design objects with fields like:
 

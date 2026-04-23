@@ -52,6 +52,12 @@ Installed agents: Lani, Meda, Crea (symlinked from `/root/.agents/skills/laniame
 
 ## Changelog
 
+### 2026-04-23 — laniameda-gallery-query
+**Change:** Updated
+**Agents:** all
+**Action:** Sync the installed skill.
+**Notes:** Added typed copied gallery ID support (`asset:<id>`, `pack:<id>`, `design:<id>`), direct pack fetch via `getPack`, and `getById` resolution for IDs copied from the gallery UI.
+
 ### 2026-03-31 — desi-webdesign-practicies-extraction
 **Change:** Added to web-design/  
 **Agents:** all  

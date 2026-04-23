@@ -67,10 +67,20 @@ interface AssetGetParams {
   assetId: string;
 }
 
+interface GalleryIdGetParams {
+  action: "getById";
+  id: string;
+}
+
 interface AssetDownloadParams {
   action: "download";
   assetId: string;
   outDir?: string;
+}
+
+interface AssetPackGetParams {
+  action: "getPack";
+  packId: string;
 }
 
 interface DesignListParams {
@@ -98,7 +108,9 @@ type Params =
   | AssetListParams
   | AssetSearchParams
   | AssetGetParams
+  | GalleryIdGetParams
   | AssetDownloadParams
+  | AssetPackGetParams
   | DesignListParams
   | DesignGetParams;
 
@@ -123,8 +135,26 @@ interface CompactAsset {
   height: unknown;
   folderId: unknown;
   assetRole: unknown;
+  assetPackId: unknown;
+  packSlotIndex: unknown;
   createdAt: unknown;
   score?: unknown;
+}
+
+interface CompactAssetPack {
+  id: unknown;
+  title: unknown;
+  description: unknown;
+  pillar: unknown;
+  modelName: unknown;
+  domain: unknown;
+  ingestKey: unknown;
+  coverAssetId: unknown;
+  isPublic: unknown;
+  isFeatured: unknown;
+  itemCount: unknown;
+  createdAt: unknown;
+  updatedAt: unknown;
 }
 
 interface CompactDesignEntry {
@@ -178,6 +208,52 @@ export function resolveOwnerUserId(explicitValue?: string): string {
   return value;
 }
 
+type GalleryIdKind = "asset" | "pack" | "design";
+
+function normalizeGalleryIdKind(kind: string): GalleryIdKind | null {
+  switch (kind) {
+    case "asset":
+    case "assets":
+      return "asset";
+    case "pack":
+    case "packs":
+    case "assetPack":
+    case "assetPacks":
+      return "pack";
+    case "design":
+    case "designs":
+    case "designInspiration":
+    case "designInspirations":
+      return "design";
+    default:
+      return null;
+  }
+}
+
+function parseGalleryId(value: string, expectedKind?: GalleryIdKind) {
+  const trimmed = value.trim();
+  const separatorIndex = trimmed.indexOf(":");
+  if (separatorIndex > 0) {
+    const rawKind = trimmed.slice(0, separatorIndex);
+    const id = trimmed.slice(separatorIndex + 1).trim();
+    const kind = normalizeGalleryIdKind(rawKind);
+    if (kind && id) {
+      if (expectedKind && kind !== expectedKind) {
+        throw new Error(`Expected a ${expectedKind} ID, got ${kind}:${id}.`);
+      }
+      return { kind, id };
+    }
+  }
+
+  if (expectedKind) {
+    return { kind: expectedKind, id: trimmed };
+  }
+
+  throw new Error(
+    "Typed gallery ID is required. Use asset:<id>, pack:<id>, or design:<id>.",
+  );
+}
+
 const compactAsset = (asset: Record<string, unknown>): CompactAsset => ({
   id: asset._id,
   kind: asset.kind,
@@ -193,8 +269,26 @@ const compactAsset = (asset: Record<string, unknown>): CompactAsset => ({
   height: asset.height,
   folderId: asset.folderId,
   assetRole: asset.assetRole,
+  assetPackId: asset.assetPackId,
+  packSlotIndex: asset.packSlotIndex,
   createdAt: asset.createdAt,
   ...(asset.score !== undefined ? { score: asset.score } : {}),
+});
+
+const compactAssetPack = (pack: Record<string, unknown>): CompactAssetPack => ({
+  id: pack._id,
+  title: pack.title,
+  description: pack.description,
+  pillar: pack.pillar,
+  modelName: pack.modelName,
+  domain: pack.domain,
+  ingestKey: pack.ingestKey,
+  coverAssetId: pack.coverAssetId,
+  isPublic: pack.isPublic,
+  isFeatured: pack.isFeatured,
+  itemCount: pack.itemCount,
+  createdAt: pack.createdAt,
+  updatedAt: pack.updatedAt,
 });
 
 const compactDesignEntry = (
@@ -351,23 +445,58 @@ export async function handleSearch(params: AssetSearchParams, runtime?: QueryRun
 
 export async function handleGet(params: AssetGetParams, runtime?: QueryRuntime) {
   const { convexQuery } = createHttpClient(runtime);
+  const { id: assetId } = parseGalleryId(params.assetId, "asset");
   const asset = (await convexQuery("assets:getGalleryAsset", {
-    id: params.assetId,
+    id: assetId,
     ownerUserId: resolveOwnerUserId(runtime?.ownerUserId),
   })) as Record<string, unknown> | null;
 
   if (!asset) {
-    return { error: `Asset ${params.assetId} not found in the owner-scoped gallery.` };
+    return { error: `Asset ${assetId} not found in the owner-scoped gallery.` };
   }
 
   return { asset: compactAsset(asset) };
 }
 
+export async function handleGetPack(params: AssetPackGetParams, runtime?: QueryRuntime) {
+  const { convexQuery } = createHttpClient(runtime);
+  const { id: packId } = parseGalleryId(params.packId, "pack");
+  const packResult = (await convexQuery("assetPacks:getGalleryAssetPack", {
+    packId,
+    ownerUserId: resolveOwnerUserId(runtime?.ownerUserId),
+  })) as { pack: Record<string, unknown>; assets: Record<string, unknown>[] } | null;
+
+  if (!packResult) {
+    return { error: `Pack ${packId} not found in the owner-scoped gallery.` };
+  }
+
+  return {
+    pack: compactAssetPack(packResult.pack),
+    count: packResult.assets.length,
+    assets: packResult.assets.map(compactAsset),
+  };
+}
+
+export async function handleGetById(params: GalleryIdGetParams, runtime?: QueryRuntime) {
+  const parsed = parseGalleryId(params.id);
+  if (parsed.kind === "asset") {
+    return await handleGet({ action: "get", assetId: parsed.id }, runtime);
+  }
+  if (parsed.kind === "pack") {
+    return await handleGetPack({ action: "getPack", packId: parsed.id }, runtime);
+  }
+  return await handleGetDesign(
+    { action: "getDesign", designInspirationId: parsed.id },
+    runtime,
+  );
+}
+
 export async function handleDownload(params: AssetDownloadParams, runtime?: QueryRuntime) {
   const outDir = params.outDir || "/tmp/laniameda-gallery";
   const { fetchImpl } = createHttpClient(runtime);
+  const { id: assetId } = parseGalleryId(params.assetId, "asset");
 
-  const result = await handleGet({ action: "get", assetId: params.assetId }, runtime);
+  const result = await handleGet({ action: "get", assetId }, runtime);
   if ("error" in result) {
     return result;
   }
@@ -416,14 +545,18 @@ export async function handleListDesigns(
 export async function handleGetDesign(params: DesignGetParams, runtime?: QueryRuntime) {
   const { convexQuery } = createHttpClient(runtime);
   const ownerUserId = resolveOwnerUserId(runtime?.ownerUserId);
+  const { id: designInspirationId } = parseGalleryId(
+    params.designInspirationId,
+    "design",
+  );
   const design = (await convexQuery("designInspirations:getDesignInspiration", {
-    id: params.designInspirationId,
+    id: designInspirationId,
     ownerUserId,
   })) as Record<string, unknown> | null;
 
   if (!design) {
     return {
-      error: `Design inspiration ${params.designInspirationId} not found in the owner-scoped gallery.`,
+      error: `Design inspiration ${designInspirationId} not found in the owner-scoped gallery.`,
     };
   }
 
@@ -452,8 +585,12 @@ export async function runGalleryQuery(params: Params, runtime?: QueryRuntime) {
       return await handleSearch(params, runtime);
     case "get":
       return await handleGet(params, runtime);
+    case "getById":
+      return await handleGetById(params, runtime);
     case "download":
       return await handleDownload(params, runtime);
+    case "getPack":
+      return await handleGetPack(params, runtime);
     case "listDesigns":
       return await handleListDesigns(params, runtime);
     case "getDesign":
