@@ -26,6 +26,13 @@ SKIP_EXTERNAL_SYNC="${SKIP_EXTERNAL_SYNC:-}"
 
 mkdir -p "$AGENTS_DIR" "$CLAUDE_DIR" "$CODEX_DIR"
 
+# Legacy or superseded installed skill directories that should be pruned on every sync.
+# These cause loader duplication or outdated triggering behavior if left behind.
+LEGACY_SKILLS=(
+  "laniameda-gallery"
+  "seedance-director"
+)
+
 # External-origin skills. Each entry: "<origin-repo-path>:<origin-skill-subdir>:<local-category>"
 # Before installing, pull the origin repo and rsync the skill into this repo so
 # downstream agents always get the latest version from ground truth.
@@ -87,6 +94,17 @@ updated=0
 created=0
 skipped=0
 
+remove_legacy_skill() {
+  local name="$1"
+  local dest_root="$2"
+
+  if [[ -L "$dest_root/$name" ]]; then
+    rm "$dest_root/$name"
+  elif [[ -d "$dest_root/$name" ]]; then
+    rm -rf "$dest_root/$name"
+  fi
+}
+
 sync_dir() {
   local src="$1"
   local dest_root="$2"
@@ -147,6 +165,18 @@ sync_skill() {
 
 echo "Syncing laniameda skills..."
 echo ""
+
+for legacy_skill in "${LEGACY_SKILLS[@]}"; do
+  remove_legacy_skill "$legacy_skill" "$AGENTS_DIR"
+  remove_legacy_skill "$legacy_skill" "$CLAUDE_DIR"
+  remove_legacy_skill "$legacy_skill" "$CODEX_DIR"
+  if [[ ${#WORKSPACE_DIR_ARRAY[@]} -gt 0 ]]; then
+    for workspace_dir in "${WORKSPACE_DIR_ARRAY[@]}"; do
+      [[ -z "$workspace_dir" ]] && continue
+      remove_legacy_skill "$legacy_skill" "$workspace_dir"
+    done
+  fi
+done
 
 # Collect all skill paths
 declare -a skill_paths=()

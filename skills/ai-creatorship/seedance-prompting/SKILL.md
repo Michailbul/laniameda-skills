@@ -5,8 +5,10 @@ description: >
   multi-shot cinematic video prompt, timecoded AI video scene, or wants better character consistency,
   camera choreography, stop-motion beats, or physics-aware motion in Seedance. Also use when the user
   asks for AI-generated reels, TikToks, YouTube clips, Instagram videos, or general AI video scene
-  prompts that need cinematic framing, camera movement, lighting, or visual style. Prefer this skill
-  over generic video prompting when the target model is explicitly Seedance.
+  prompts that need cinematic framing, camera movement, lighting, or visual style and the target model
+  is explicitly Seedance. This skill also owns Seedance-specific structured output requests such as JSON
+  or bilingual EN+ZH prompt delivery. Prefer this skill over generic video prompting when the target
+  model is explicitly Seedance.
 metadata:
   laniameda:
     departments: ['Operations', 'Marketing']
@@ -43,12 +45,16 @@ These are the non-negotiables.
 - **Default prompt order:** Subject → Action → Camera → Style → Constraints → Audio
 - **Always lock continuity when needed:** `same character throughout all shots`, `same car throughout all shots`, `same dog throughout all shots`, or `same product throughout all shots`
 - **Use the identity lock only when continuity matters** — do not force `same character` on campaign montages, multi-product ads, or deliberately different subjects
-- **Use timecodes for multi-shot:** `[0s] [3s] [6s]`
+- **Timecodes are the default for multi-shot when timing precision matters:** `[0s] [3s] [6s]`
+- **Director-prose sequencing is also valid for multi-shot** if the shot order is explicit with phrases like `opens on`, `pushes in`, `cuts to`, `returns to`, `concluding with`
 - **Max 3 shots per prompt** — more causes drift
 - **Ideal prompt length:** 120–280 words
 - **Action starts at second zero** — never open with stillness unless the intended motion is environmental or micro-movement
 - **For simple one-shot clips, a compact non-timecoded prompt is valid** — do not force multi-shot structure when one clear shot is enough
 - **Use one main action verb per shot** — avoid stacking multiple unrelated actions into the same beat
+- **One sentence should do one job** — setup, lighting, camera progression, hero insert, or ending beat
+- **Use direct director verbs, not poetic filler** — `opens on`, `reveals`, `pushes in`, `tracks`, `whip-pans`, `cuts back`, `holds`, `concludes`
+- **Keep adjective density controlled** — 1 to 3 precise modifiers beat a pile of cinematic synonyms
 
 If the user gives a loose AI-video idea, convert it into this six-part base before adding advanced structure:
 `Camera/shot type -> Subject -> Action/motion -> Environment -> Lighting -> Visual style/mood`.
@@ -65,6 +71,31 @@ Always deliver in this order:
 4. **Optional tighter / bolder version** — only if useful
 
 Do not bury the actual prompt under explanation.
+
+If the user explicitly asks for **JSON**, **bilingual EN+ZH**, or other machine-shaped Seedance output:
+- keep the same Seedance logic from this skill
+- change only the delivery format
+- do not switch to a separate Seedance skill
+
+### Structured-output variant
+
+When the user asks for structured Seedance output, use a compact shape like:
+
+```json
+{
+  "mode": "single-shot | multi-shot | reference-controlled",
+  "prompt_en": "...",
+  "prompt_zh": "...",
+  "continuity_lock": "...",
+  "notes": ["optional short implementation notes"]
+}
+```
+
+Rules:
+- `prompt_en` is required
+- add `prompt_zh` only when the user asks for Chinese or bilingual output
+- keep commentary outside the JSON unless the user explicitly wants explanation
+- if the user wants pure JSON, return pure JSON
 
 ---
 
@@ -93,6 +124,27 @@ Use this when the user wants one clean clip or fast iteration:
 Example:
 ```text
 A red sports car races through a dusk mountain road. Low front three-quarter tracking shot with subtle handheld vibration and heavy directional motion blur. Premium automotive commercial realism, blue dusk sky, pink roadside flowers, anamorphic 2.39:1, fine grain. Realistic tire grip, suspension compression, petal turbulence in the slipstream. Deep engine note and rushing wind.
+```
+
+### Director-prose multi-shot template
+
+Use this when the user wants the prompt to read like a concise director brief instead of a timecoded block.
+This is valid for Seedance if the shot order stays explicit and each sentence has a clear job.
+
+```text
+[Opening master shot introducing subject, setting, and overall tone]. [Physical environment and lighting system]. [Camera progression from master to closer coverage]. [Hero insert or specific performer/object focus]. [Final return, reveal, or concluding beat]. [Optional sound or dialogue note].
+```
+
+Working rule:
+- sentence 1 = who / where / what kind of scene
+- sentence 2 = what the light and set are doing physically
+- sentence 3 = how the camera moves through the sequence
+- sentence 4 = what specific hero detail gets isolated
+- sentence 5 = how the clip lands
+
+Example:
+```text
+A wide cinematic shot opens on the lead dancer and the full group in a dark seamless studio, already mid-performance. Soft rectangular overhead panels cast a cool low-key wash while harder front and side keys carve bright highlights across the black floor and structured wardrobe. The camera slowly pushes in from a full-body wide shot to a tight medium close-up on the lead performer, then cuts back to the wider formation as the choreography sharpens. A low-angle medium shot isolates the lead dancer for one hero beat, followed by a clean facial close-up. The sequence concludes on a full-group wide shot with crisp rhythmic cuts and subtle push-ins, pull-outs, and gentle pans.
 ```
 
 ---
@@ -314,6 +366,8 @@ Use for short story beats.
 Rules:
 - max 3 shots
 - each shot escalates or contrasts intentionally
+- choose either **timecodes** or **director-prose sequencing** based on what makes the beat easiest to read
+- if using director-prose, make every transition explicit in language
 - final shot must land on reveal / impact / silence / cut to black
 
 ## Mode 3 — Reference-controlled
@@ -323,6 +377,7 @@ If the user provides reference frames or character references:
 - keep camera complexity lower than normal
 - avoid more than 2 shots unless necessary
 - build from what is visible in the reference, not invented off-frame lore
+- when the reference already shows the subject and set, spend prompt tokens on motion, shot progression, physics, and ending beat instead of re-describing the starting frame
 
 ## Mode 4 — Commercial / product montage
 Use for ads, fashion films, automotive inserts, pet campaigns, or cutaway coverage.
@@ -343,9 +398,10 @@ Watch for these when constructing prompts:
 - Flat lighting → missing directional source, color temperature, or contrast behavior
 - Action + camera + effects all peaking together → chaos
 - No continuity lock when sameness matters → face/wardrobe/vehicle drift
-- No timecodes in multi-shot prompts → mushy sequencing
+- Multi-shot sequencing that is not clearly ordered → mushy sequencing, whether timecoded or prose
 - Overusing timecodes for a simple one-shot clip → unnecessary rigidity
 - Generic style words → weak visual language
+- Poetic filler or synonym stacks → the model loses the actual instruction
 - Missing physics → fake water, dead cloth, weightless impacts, weak speed
 - Weak ending → clip feels unfinished
 
@@ -380,6 +436,7 @@ This makes failures legible.
 - **Dead realism** → add environment reaction physics, inertia, or secondary motion
 - **Weak emotion** → replace abstract feeling words with visible behavior
 - **Boring output** → strengthen contrast, silhouette, color system, or final beat
+- **Prompt feels overwritten** → collapse adjective stacks, keep one sentence per job, switch to directorial verbs
 
 ### Reference-material debugging
 If using references:
@@ -407,6 +464,11 @@ same character throughout all shots, same character consistent appearance every 
 ### Template C — STOP MOTION beat
 ```text
 same character throughout all shots, same character consistent appearance every shot. [0s] [action in progress]. [camera]. [color system]. [3s] STOP MOTION 1.0s — complete audio silence — [exact frozen visual] — explosive snap-back to full speed. [6s] [final impact or reveal]. Global: [constraints], [physics], [format].
+```
+
+### Template D — Director-prose sequence
+```text
+[Wide or master shot opens on subject and setting]. [Physical set design and lighting system]. [Camera pushes / pans / tracks / whip-pans into the next beat]. [Specific hero insert or character focus]. [Sequence returns, expands, or concludes on the final beat]. [Optional dialogue or sound note].
 ```
 
 ### Platform format defaults
@@ -456,6 +518,30 @@ Use this only when the prompt needs a fuller director-style brief, such as:
 
 This is an **advanced optional structure**, not the default.
 
+### Why the reference prompts work
+
+The strongest professional Seedance-style prompts tend to follow this logic:
+- **Open with the master image** — who is on screen, what kind of scene it is, and the core genre signal
+- **Ground the space physically** — floor, walls, haze, skyline, cockpit, street debris, overhead panels
+- **Describe the lighting as a system** — source, direction, softness or hardness, and what surfaces it shapes
+- **Direct the edit in prose** — wide to medium, medium to close-up, push-in then cut back, low-angle hero insert, concluding wide
+- **Attach mood to visible causes** — not just `powerful` or `mysterious`, but low-key contrast, stark spotlight, dust-filled backlight, harsh daylight, rhythmic cuts
+- **Repeat anchor nouns when needed** — mecha, cockpit, ruined city, group choreography; repetition keeps the model on track
+- **Land on a final beat** — return to the group, hold on the face, cut to the cockpit, conclude on the wide
+
+### Director-language heuristics
+
+When writing this style, follow these rules:
+- Write like a director briefing shots to a previs team, not like a copywriter selling the scene
+- Use declarative present-tense sentences the model can stage directly
+- Let each sentence carry one layer: setup, set design, lighting, camera progression, hero beat, ending
+- Prefer physical nouns and film terms over abstract adjectives
+- If you mention mood, tie it to camera, light, performance, or cut rhythm in the same sentence
+- When moving through multiple shots, keep the sequence linear and readable
+- Mention shot size and angle whenever focus changes: `wide shot`, `medium shot`, `close-up`, `low-angle`, `extreme close-up`
+- Name only the camera moves that matter to the beat; subtle push-ins, pull-outs, pans, tracking, and whip-pans are usually enough
+- For action scenes, describe force and recoil in physical terms instead of generic intensity words
+
 ### Advanced structure
 - **Goal & Tone** — one-line statement of the emotional and production objective
 - **Narrative progression** — beginning, development, climax, or equivalent timeline beats
@@ -472,6 +558,16 @@ If the Seedance surface supports reference syntax such as `@image`, `@video`, or
 - `@audio` → soundtrack, beat sync, lip-sync reference, ambience reference
 
 Rule: assign each reference one clear job. Do not overload a single generation with too many competing reference instructions.
+
+### Director-language checklist
+
+Before sending a dense prose prompt, verify:
+- Can I underline a clear opening frame in the first sentence?
+- Did I name the set surfaces and the light sources, not just the vibe?
+- Is the shot progression explicit without needing to guess chronology?
+- Does each sentence have one job, or did I stack too many instructions?
+- Are my strongest words concrete film language instead of hype language?
+- Does the prompt end on a clean final beat?
 
 ---
 

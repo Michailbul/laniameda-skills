@@ -52,6 +52,18 @@ Installed agents: Lani, Meda, Crea (symlinked from `/root/.agents/skills/laniame
 
 ## Changelog
 
+### 2026-04-23 — seedance-director
+**Change:** Removed
+**Agents:** all
+**Action:** Delete installed `seedance-director`; use `seedance-prompting` for all Seedance work, including JSON or bilingual output.
+**Notes:** Seedance is now consolidated into one specialist skill to avoid trigger collisions.
+
+### 2026-04-23 — laniameda-gallery legacy alias
+**Change:** Removed
+**Agents:** all
+**Action:** Delete installed `laniameda-gallery` if present; keep only `laniameda-gallery-ingest`.
+**Notes:** The old installed alias advertised the same `name:` as `laniameda-gallery-ingest`, which caused duplicate indexing.
+
 ### 2026-04-23 — laniameda-gallery-query
 **Change:** Updated
 **Agents:** all

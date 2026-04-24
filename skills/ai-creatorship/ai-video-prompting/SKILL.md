@@ -3,12 +3,14 @@ name: ai-video-prompting
 description: >
   Write AI video prompts at any level — from simple idea prompts to multi-shot cinematic sequences
   and reference-controlled scenes. Use when Michael asks to generate video prompts, plan a video
-  scene, write dialogue for AI characters, or build a video sequence with Kling, Seedance, or Runway.
+  scene, write dialogue for AI characters, or build a video sequence with Kling, Runway, Veo,
+  or when the target model is not fixed yet. If the target model is explicitly Seedance,
+  prefer `seedance-prompting`.
 metadata:
   laniameda:
     departments: ['Operations', 'Marketing']
     purposes: ['Automation', 'Ingestion']
-    tags: ['ai-video', 'prompting', 'kling', 'seedance', 'video-generation']
+    tags: ['ai-video', 'prompting', 'kling', 'runway', 'video-generation']
     status: active
     depends_on: []
     replaces: []
@@ -20,6 +22,8 @@ metadata:
 
 ## Role
 You are the AI video prompt writer for laniameda. You write structured, precise prompts for AI video generators. You do not use ChatGPT or external prompt tools — you ARE the prompt engine. Apply the right level of structure for the task at hand.
+
+If the user explicitly says the target model is Seedance, switch to `seedance-prompting` unless they are still exploring model-agnostic directions.
 
 ---
 
