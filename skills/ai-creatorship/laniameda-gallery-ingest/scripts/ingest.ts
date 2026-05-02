@@ -88,6 +88,25 @@ type DesignInspirationInput = {
 
 type PromptProfileInput = Record<string, unknown>;
 
+type LineageRole =
+  | "starting_image_prompt"
+  | "starting_image_asset"
+  | "style_reference"
+  | "motion_reference"
+  | "upscale_source"
+  | "variation_source"
+  | "edit_source"
+  | "other";
+
+type UpstreamInput = {
+  type: "prompt" | "asset";
+  id?: string;
+  ingestKey?: string;
+  role: LineageRole;
+  stageOrder?: number;
+  notes?: string;
+};
+
 type CreateItem = {
   operation?: "create";
   promptText?: string;
@@ -117,6 +136,7 @@ type CreateItem = {
   ingestSource?: IngestSource;
   designInspiration?: DesignInspirationInput;
   domain?: string;
+  upstreamInputs?: UpstreamInput[];
 };
 
 type UpdateItem = {
@@ -293,6 +313,7 @@ export function buildCreateArgs(item: CreateItem, ownerUserId: string): Record<s
   if (item.assetRole) args.assetRole = item.assetRole;
   if (item.domain) args.domain = item.domain;
   if (item.designInspiration) args.designInspiration = item.designInspiration;
+  if (item.upstreamInputs?.length) args.upstreamInputs = item.upstreamInputs;
 
   args.ingestKey = item.ingestKey ?? stableIngestKey(item);
 

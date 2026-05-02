@@ -52,6 +52,12 @@ Installed agents: Lani, Meda, Crea (symlinked from `/root/.agents/skills/laniame
 
 ## Changelog
 
+### 2026-05-02 — laniameda-gallery-ingest + laniameda-gallery-query
+**Change:** Updated
+**Agents:** all
+**Action:** Synced and reinstalled via `./install-skills.sh`.
+**Notes:** Gallery ingest now documents video workflow lineage via `upstreamInputs`; query docs clarify copied `asset:<id>`, `pack:<id>`, and `design:<id>` handoff tokens from the gallery UI.
+
 ### 2026-04-23 — seedance-director
 **Change:** Removed
 **Agents:** all

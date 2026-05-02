@@ -21,6 +21,12 @@ Use `convex/schema.ts` as source of truth. This file is the quick ingest map for
   - Owner-scoped default metadata for browser-extension design saves.
   - Not used by the ingest script today, but part of the shared backend schema.
 
+- `generationLineage`
+  - Structured upstream dependencies between prompts/assets. Use when a generation was produced from an earlier prompt or asset (e.g. a Seedance 2 video generated from a GPT-Image-2 starting frame).
+  - Fields: `ownerUserId`, `targetPromptId`/`targetAssetId` (exactly one), `sourcePromptId`/`sourceAssetId` (exactly one), `role`, `stageOrder`, `notes`, `createdAt`.
+  - Idempotent on the tuple (owner, target*, source*, role). Re-ingest with the same upstream does not create duplicates.
+  - Populated by `ingest:ingestFromApi` via `upstreamInputs`. Cleaned up automatically when the target or source prompt/asset is deleted.
+
 - `semanticDocuments`
   - Async search index rows generated from assets, prompts, and design inspirations.
   - Backend-managed fields include `sourceType`, `sourceId`, linked record IDs, `searchText`, `contentHash`, embedding data, and owner/public scope keys.
@@ -46,6 +52,7 @@ See `convex/validators.ts`:
 - `tagCategoryValidator`, `tagSourceValidator`, `typedTagInputValidator`
 - `designInspirationTypeValidator`, `designPlatformValidator`
 - `assetRoleValidator`, `ingestSourceValidator`
+- `lineageRoleValidator` — enum: `starting_image_prompt`, `starting_image_asset`, `style_reference`, `motion_reference`, `upscale_source`, `variation_source`, `edit_source`, `other`
 
 ## Join tables
 
