@@ -485,12 +485,14 @@ Do not help bypass filters. If a prompt is blocked, reframe in cleaner cinematic
 
 ---
 
-## WHEN TO USE THIS SKILL VS. THE GENERAL SEEDANCE-PROMPTING APPROACH
+## WHEN TO USE THIS SKILL VS. `seedance-prompting`
 
-- Use **seedance-screenwriter** (this skill) when the work is narrative — scenes with dialogue, story beats, shots that cut into a film, character continuity across shots.
-- For non-narrative Seedance work — pure ad spots, music-video cut, isolated product shots, character demos with no story spine — the same screenplay-format discipline still helps but the dialogue and continuity-lock sections become optional.
+Two sibling skills, one decision:
 
-When in doubt: if the shots will be edited into a story, use the screenplay format.
+- Use **`seedance-screenwriter`** (this skill) when the work is **narrative** — scenes with dialogue, story beats, shots that cut into a film or short, character continuity across shots, anything that pairs with a screenplay.
+- Use **`seedance-prompting`** (the general-purpose sibling) when the work is **non-narrative** — ad spots, music videos, fashion films, automotive inserts, product shots, pet/character demos, cutaway montages, social reels with no story spine.
+
+When in doubt: if the shots will be edited into a story or scene, use this skill. If the shots stand alone or sell something, use the general one.
 
 ---
 
@@ -502,6 +504,7 @@ Source material for Seedance prompt ideation lives in the studio KB:
 Structured prompt library:
 - `docs/seedance/imagine-art-seedance-prompt-library.json`
 - `docs/seedance/imagine-art-seedance-prompt-library-categorized.json`
-- `references/seedance-prompts-legacy.md` (legacy general-purpose templates inside this skill — use only for non-narrative work)
 
-Treat the library as example coverage. The screenplay-format rules above override.
+For general-purpose / non-narrative Seedance examples (commercial, ad, music video templates), consult the sibling skill `seedance-prompting` and its `references/seedance-prompts-legacy.md`.
+
+Treat any library as example coverage. The screenplay-format rules above override.

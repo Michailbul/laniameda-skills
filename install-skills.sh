@@ -31,7 +31,6 @@ mkdir -p "$AGENTS_DIR" "$CLAUDE_DIR" "$CODEX_DIR"
 LEGACY_SKILLS=(
   "laniameda-gallery"
   "seedance-director"
-  "seedance-prompting"
 )
 
 # External-origin skills. Each entry: "<origin-repo-path>:<origin-skill-subdir>:<local-category>"
