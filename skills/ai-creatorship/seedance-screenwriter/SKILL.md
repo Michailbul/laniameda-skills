@@ -13,9 +13,11 @@ The keyframe shows the world. The prompt directs the action.
 
 ---
 
-## THE ONE RULE THAT GOVERNS EVERYTHING
+## TWO HARD RULES THAT GOVERN EVERYTHING
 
-**No meta openers.** Never start a Seedance prompt with phrases like:
+### Rule 1 — No meta openers
+
+Never start a Seedance prompt with phrases like:
 
 ❌ "Reference-controlled single-shot Seedance generation, driven by the attached painterly wide café terrace plate. Painterly stylized 2D feature animation aesthetic — Cartoon Saloon × Disney concept art lineage — locked throughout, every figure and surface remains in the same painterly style..."
 
@@ -30,6 +32,33 @@ Instead, **open with a shot header** and write the action like a screenplay:
 ✅ "MEDIUM CLOSE-UP — THE BOY. Eye-level. Daughter's shoulder soft in foreground."
 
 The style lock and identity lock fold into the prose only where they earn their keep — usually as one short line at the end of the prompt as a global note. Not at the start. Not as ceremony.
+
+### Rule 2 — No backreferences to other shots
+
+Each Seedance prompt is a separate generation. The model has zero memory of any sibling shot in the scene. Backreferences are dead tokens.
+
+❌ "Same axis as A1.3" · "Same framing as B1" · "Mirror to A1.2" · "Reverse of B3" · "Slightly wider than B3" · "Same as before" · "Continuing from the previous shot"
+
+Every shot prompt must be **fully self-contained**. Restate framing, eye-level, axis direction, character placement, foreground/background elements, light direction, and palette in **absolute terms** — even if it's identical to the prior shot. Repetition across prompts is correct prompting, not redundancy.
+
+✅ Wrong then right:
+
+```
+❌ SHOT B3 — MEDIUM CLOSE-UP, THE DAUGHTER (≈4s)
+   Same framing as B1. She still doesn't look up.
+
+✅ SHOT B3 — MEDIUM CLOSE-UP, THE DAUGHTER (≈4s)
+   Eye-level on her face, framed from the chest up. Her
+   hand rests low in shot on the white POODLE's head. She
+   still doesn't look up.
+```
+
+This rule applies to two layers:
+
+1. **The Seedance prompt itself** — every shot description stands alone with absolute framing, axis, light, and placement.
+2. **The screenplay description in `scene.md`** — when the screenplay will be translated into separate Seedance generations, write each shot self-coherently. Don't lean on sibling shots for context.
+
+Continuity across shots is preserved through the **keyframe + the identity CAPS lock + the locked style line** — never through prose backreferences.
 
 ---
 
@@ -363,7 +392,8 @@ Eye-level. Daughter's shoulder soft in foreground left.
 
 SHOT A3 — MEDIUM CLOSE ON THE DAUGHTER (≈2s)
 
-Same axis, reversed. Boy's hand on his espresso cup soft in
+Eye-level on the DAUGHTER's face, framed from the chest up.
+The BOY's hand wrapped around his espresso cup soft in
 foreground right. She catches her breath.
 
                     DAUGHTER
@@ -443,6 +473,7 @@ grain, locked.]
 ## FAILURE PATTERNS TO AVOID
 
 - **Meta openers.** Start with the shot header, not "Reference-controlled..."
+- **Backreferences to other shots.** "Same axis as A1", "mirror to B2", "same as previously", "slightly wider than B3" — all dead tokens. Restate framing, axis, light, placement in absolute terms every shot.
 - **Engineering verbs.** "Locked across all three beats", "consistency lock applied", "continuity constraint" — fold into action prose.
 - **Stacked adjective lists.** "Painterly stylized hand-painted 2D feature animation visdev concept art lineage" — once, at the end, in a style line.
 - **Burying the action.** If the action is at the bottom under five paragraphs of style, Seedance will under-prompt the motion. Action goes in the screenplay block. Style goes on one final line.
